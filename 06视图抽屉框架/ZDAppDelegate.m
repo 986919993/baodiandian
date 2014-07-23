@@ -7,14 +7,17 @@
 //
 
 #import "ZDAppDelegate.h"
-
+#import "ZDRootViewController.h"
 @implementation ZDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.window.rootViewController = [[ZDRootViewController alloc]init];
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
