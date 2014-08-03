@@ -23,12 +23,12 @@
 #define ZDLog(...)
 #endif
 
-#define IWRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:arc4random_uniform(255)/255.0]
-#define IWColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:255/255.0];
+#define ZDRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:arc4random_uniform(255)/255.0]
+#define ZDColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:255/255.0];
 #define iOS7 ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
 #define Inch4 ([UIScreen mainScreen].bounds.size.height == 568.0)
 
-#define ZDGlobalColor IWColor(219, 219, 219)
+#define ZDGlobalColor ZDColor(219, 219, 219)
 // 间距
 #define ZDPadding 10
 // 间距
@@ -59,5 +59,14 @@
 #define degree2angle(degree)    (((degree) * M_PI) / 180)
 // 角度转弧度
 #define ZDAngle(degree)    (((degree) * M_PI) / 180)
+// 折叠控制器TransForm
+#define ZDTrans  CGAffineTransformMake(0.882386, 0.000000, 0.000000, 0.882386, 133.609589, 0.000000);
+
+#define ZDIPhoneInfo @"T1348649654285"
+#define ZDScience @"T1348649580692"
+
+#define ZDAppKey @"2897435897"
+#define ZDAppSecret @"f3ac56a61c6d63e419f45c6bb69d9699"
+#define ZDAppRedirectUrl @"http://www.baidu.com"
 
 #endif

@@ -1,17 +1,18 @@
 //
-//  ZDDetailViewController.h
-//  兄弟连
+//  CZArticleViewController.h
+//  05-网易新闻
 //
-//  Created by Dong on 14-7-4.
-//  Copyright (c) 2014年 itbast. All rights reserved.
+//  Created by LNJ on 14-7-2.
+//  Copyright (c) 2014年 itcast. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ZDInfoModel.h"
 
-@interface ZDDetailViewController : UITableViewController
+@interface ZDDetailViewController : UIViewController
 
-/** 从主界面传过来的数据，显示到当前界面 */
-@property (nonatomic,strong) ZDInfoModel *infoModel;
+// 文章的id
+@property (nonatomic, strong) NSString *docid;
+// 文章的URL
+@property (nonatomic, strong) NSString *articleURLStr;
 
 @end
