@@ -14,17 +14,41 @@
 //nickname = "Free Loop";
 //"figureurl_qq_2" = "http://q.qlogo.cn/qqapp/222222/C1BDA631B14741AF8F98E41AB2F717E8/100";
 //gender  = "\U7537"
-
+/**
+ *  昵称
+ */
 @property (nonatomic,copy) NSString *nickname;
-
+/**
+ *  城市
+ */
 @property (nonatomic,copy) NSString *city;
-
+/**
+ *  小图像（40 ＊ 40）
+ */
 @property (nonatomic,copy) NSString *figureurl_qq_1;
-
+/**
+ *  大图向（100 ＊ 100）
+ */
 @property (nonatomic,copy) NSString *figureurl_qq_2;
-
+/**
+ *  性别
+ */
 @property (nonatomic,copy) NSString *gender;
 
+
+
+/**
+ *  访问令牌
+ */
+@property (nonatomic, copy) NSString *access_tokenQQ;
+/**
+ *  访问令牌
+ */
+@property (nonatomic, copy) NSString *expirationDate;
+/**
+ *  访问令牌
+ */
+@property (nonatomic, copy) NSString *openId;
 
 
 

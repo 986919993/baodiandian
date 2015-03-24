@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ZDSearchBarDelegate <NSObject>
 
-@interface ZDSearchBar : UITextField
+- (void)searchBarDidChanged:(NSString *)text;
+
+@end
+@interface ZDSearchBar : UITextField <UITextFieldDelegate>
+
+@property (nonatomic,weak) id<ZDSearchBarDelegate> searchBarDelegate;
 
 @end

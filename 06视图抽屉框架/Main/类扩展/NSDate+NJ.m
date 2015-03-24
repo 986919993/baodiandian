@@ -28,6 +28,35 @@
     (selfCmps.day == nowCmps.day);
 }
 
+- (BOOL)isZaoShang
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    int unit = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear |NSCalendarUnitHour;
+    // 1.获得当前时间的年月日
+    NSDateComponents *nowCmps = [calendar components:unit fromDate:[NSDate date]];
+    BOOL isZao = (nowCmps.hour+8) < 11;
+    return isZao;
+}
+- (BOOL)isXiaWu
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    int unit = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear;
+    // 1.获得当前时间的年月日
+    NSDateComponents *nowCmps = [calendar components:unit fromDate:[NSDate date]];
+    BOOL isZao = (nowCmps.hour+8) < 16;
+
+    return isZao;
+}
+- (BOOL)isWanShang
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    int unit = NSCalendarUnitDay | NSCalendarUnitMonth |  NSCalendarUnitYear;
+    // 1.获得当前时间的年月日
+    NSDateComponents *nowCmps = [calendar components:unit fromDate:[NSDate date]];
+    BOOL isZao = (nowCmps.hour+8) < 24;
+    return isZao;
+}
+
 /**
  *  是否为昨天
  */

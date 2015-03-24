@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>支付宝流程</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	1.与支付宝&quot;签约&quot;,获得商户ID(partner)和账号ID(seller)&lt;br/&gt;	2.下载相应的公钥私钥文件(加密签名用)&lt;br/&gt;	3.下载支付宝SDK&lt;br/&gt;	4.生成订单信息&lt;br/&gt;	5.调用支付宝客户端,由支付宝客户端跟支付宝安全服务器打交道&lt;br/&gt;	6.支付完成后返回支付结果给app客户端和服务器&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>修改AFN框架可以支持text/html格式的两种方法</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	1.manger.resposeSerializer.acceptableContentTypes = [NSSet   setWithObject:@&quot;text/html&quot;];直接设置寄存器的返回数据格式&lt;br/&gt;	2.或者直接修改AFN框架  在框架中查找json/html格式, 望数组中添加@&quot;text/html&quot;&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>25种性能优化</string>
+		<key>detail</key>
+		<string>&lt;p&gt;初级&lt;br/&gt;1.使用ARC进行内存管理&lt;br/&gt;2.在适当的情况下使用reuseIdentifier&lt;br/&gt;3.尽可能将View设置为不透明（Opaque）&lt;br/&gt;4.避免臃肿的XIBs&lt;br/&gt;5.不要阻塞主线程&lt;br/&gt;6.让图片的大小跟UIImageView一样&lt;br/&gt;7.选择正确的集合&lt;br/&gt;8.使用GZIP压缩&lt;br/&gt;中级：&lt;br/&gt;9.重用和延迟加载View&lt;br/&gt;10.缓存、缓存、缓存&lt;br/&gt;11.考虑绘制&lt;br/&gt;12.处理内存警告&lt;br/&gt;13.重用花销很大的对象,有些对象的初始化非常慢,如NSDataFormatter和NSCalendar&lt;br/&gt;14.使用Sprite Sheets&lt;br/&gt;15.避免重新处理数据&lt;br/&gt;16.选择正确的数据格式&lt;br/&gt;17.设置适当的背景图片&lt;br/&gt;18.降低Web内容的影响&lt;br/&gt;19.设置阴影路径&lt;br/&gt;20.优化TableView&lt;br/&gt;21.选择正确的数据存储方式&lt;br/&gt;高级&lt;br/&gt;22.加速启动时间&lt;br/&gt;23.使用Autorelease Pool&lt;br/&gt;24.缓存图片 — 或者不缓存&lt;br/&gt;25.尽量避免Date格式化      &lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>11</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>键盘弹出时不让键盘挡住文本框</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.注册监听&lt;br/&gt;1.遍历所有子控件找出当前第一响应者是那个textField&lt;br/&gt;2.将文本框所在坐标系转成UIWindow坐标系&lt;br/&gt;3.键盘的Y值 减去 转换好的坐标系的最大Y值 看他是否小于(说明挡住了文本框);&lt;br/&gt;4.如果挡住就调整self.contentOffset. 向上滚动所挡住的位置 加上一定的间距&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>自定义TabBar</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.在视图将要显示的时候遍历当前tabBar的所有subviews, 如果子视图的类 isKindOfClass:[UIControl  class]就将当前子视图从父视图中销毁.&lt;br/&gt;2.自定义TabBarFrame等于当前tabBar.bounds&lt;br/&gt;3.给当前tabBar覆盖上自定义的tabBar&lt;br/&gt;4.定义一个添加子控制器的方法,并传入控制器tabBarItem的标题,图片,选中图片.&lt;br/&gt;5.通过设置的tabBarItem属性给自定义tabBar添加一个自定义按钮.传入按钮的item赋值按钮样式.添加监听按钮点击事件.&lt;br/&gt;6.在自定义TabBar中的layoutSubviews设置计算每个按钮的frame&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Xcode常用快捷键！</string>
+		<key>detail</key>
+		<string>&lt;p&gt;xcode相关：&lt;br/&gt;退出xcode command+ Q&lt;br/&gt;两个Xcode切换   command+ ~  (1左边的按钮)&lt;br/&gt;隐藏   command + M&lt;br/&gt;============文本=============&lt;br/&gt;居中 command+竖线|&lt;br/&gt;左缩进 command + [&lt;br/&gt;右缩进 command + ] &lt;br/&gt;单词选中  shift+option + 左箭头或者右箭头  (选中单词)&lt;br/&gt;============文件相关==========&lt;br/&gt;前进 command+option+右箭头&lt;br/&gt;下一文件 command+option+shift+右箭头&lt;br/&gt;返回 command+option+左箭头&lt;br/&gt;上一文件 command+option+shift+左箭头&lt;br/&gt;切换头/源文件 command+option+上箭头&lt;br/&gt;组树中定位 command+option+shift+上箭头&lt;br/&gt;==========折叠方法============&lt;br/&gt;折叠 command+control+左箭头&lt;br/&gt;屏开 command+control+右箭头&lt;br/&gt;屏开所有 control+u&lt;br/&gt;折叠方法 command+control+上箭头&lt;br/&gt;展开方法 command+control+下箭头&lt;br/&gt;折叠注释块 command+control+shift+上箭头&lt;br/&gt;展开注释块 command+control+shift+下箭头&lt;br/&gt;焦点跟随 command+option+control+f&lt;br/&gt;==============字体===========&lt;br/&gt;显示字体 command+t&lt;br/&gt;复制样式 command+option+c&lt;br/&gt;粘贴样式 command+option+v&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>必须要了解的基础知识!!!!!!!!!</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1 、&lt;br/&gt;了解main函数，  UIApplication是初始化程序的核心，它接受4个参数。  其中argc和argv两个参数来自于main()接受的两个参数；另外两个String型参数分别表示程序的主要类(principal class)和代理类(delegate class）&lt;br/&gt;2、&lt;br/&gt;plist xml格式文件通常用于储存用户设置&lt;br/&gt;pch  预编译文件头&lt;br/&gt;xib  Interface Builder 的图形界面设计文档&lt;br/&gt;StoryBoard是iOS 5的新特征，旨在代替历史悠久的NIB/XIB &lt;br/&gt;3、&lt;br/&gt;AppDelegate.m 妙用  类似于监听接口  &lt;br/&gt;应用程序启动后，委托调用applicationDidFinishLaunching方法&lt;br/&gt;应用程序要完全退出， 委托调用applicationWillTerminate方法&lt;br/&gt;4、 &lt;br/&gt;创建viewcontroller时，执行loadview -&gt; viewDidLoad&lt;br/&gt;内存警告，后台，会执行didReceiveMemoryWarning -&gt; viewDidUnLoad；如果viewcontroller当前正在显示（前台）只执行didReceiveMemoryWarning&lt;br/&gt;5、&lt;br/&gt;IBOutlet   对编译器而言只是一个标记，额外retain一次，所以需要release.&lt;br/&gt;IBoutlet修饰的字段可以和InterfaceBuilder里相应控件相关联； &lt;br/&gt;IBaction修饰的方法可以和InterfaceBuilder里控件的相应动作相关联。&lt;br/&gt;6、addSubview 是将view加到所有层的最低层&lt;br/&gt;7、&lt;br/&gt;insertSubView可以控制它添加到父视图的哪一层 &lt;br/&gt;makeKeyAndVisible作用被使用对象的主窗口显示到屏幕的最前端。&lt;br/&gt;hiddenUIView方法隐藏这个窗口&lt;br/&gt;8、&lt;br/&gt;@protocol MyProtocol &lt;NSObject&gt; &lt;br/&gt;-(void) firstMethod&lt;br/&gt;@end 协议，OC 没有多继承，不过可以通过协议来委托或者叫代理&lt;br/&gt;9、&lt;br/&gt;@property (nonatomic, retain) Engine* engine; 代码生成机制 ,生成不同类型的getter／setter函数，接口类使用&lt;br/&gt;@synthesize   engine, 合成器，实现类里面使用&lt;br/&gt;10、&lt;br/&gt;initWithFrame  没用Nib文件(XIB)时,用代码控制视图内容，需要调用initWithFrame去初始化 &lt;br/&gt;视图加载nib文件，从nib中加载对象实例时, 使用 initWithCoder初始化这些实例对象&lt;br/&gt;11、&lt;br/&gt;respondsToSelector该方法询问对象以确定其是否能够响应某个特定的消息&lt;br/&gt;if([car respondsToSelector @selector(setWheel)] == YES]) {}&lt;br/&gt;12、&lt;br/&gt;viewDidLoad:在视图加载后被调用&lt;br/&gt;viewWillAppear:视图即将可见时调用。默认情况下不执行任何操作&lt;br/&gt;viewDidAppear: 视图已完全过渡到屏幕上时调用&lt;br/&gt;viewWillDisappear:视图被驳回时调用，覆盖或以其他方式隐藏。默认情况下不执行任何操作&lt;br/&gt;viewDidDisappear:视图被驳回后调用，覆盖或以其他方式隐藏。默认情况下不执行任何操作&lt;br/&gt;13、loadNibNamed  动态加载视图&lt;br/&gt;NSArray *nibViews=[[NSBundle mainBundle] loadNibNamed:@&quot;Empty&quot; owner:self options:nil]; &lt;br/&gt;14、&lt;br/&gt;	1）componentsSeparatedByString:截取指定字符串； &lt;br/&gt;	2) pathForResource：获取程序运行时目录 &lt;br/&gt;	3)  objectAtIndex:获取当前索引的字符串； &lt;br/&gt;	4)  rangeOfString:获取指定短字符串在长字符串中&lt;br/&gt;的开始，结尾索引值；&lt;br/&gt;	5) stringWithContentsOfFile：按行读取文件 &lt;br/&gt;	6) componentsSeparatedByString:@&quot;&lt;br/&gt;15、&lt;br/&gt;-(BOOL) isKindOfClass: classObj判断是否是这个类或者这个类的子类的实例 &lt;br/&gt;-(BOOL) isMemberOfClass: classObj 判断是否是这个类的实例 &lt;br/&gt;16、&lt;br/&gt;UIScreen可以获取设备屏幕的大小&lt;br/&gt;UIView对象定义了一个屏幕上的一个矩形区域，同时处理该区域的绘制和触屏事件,一个UIView的实例可以包含和管理若干个子UIView&lt;br/&gt;UIWindow对象是所有UIView的根，管理和协调的应用程序&lt;br/&gt;UIViewController对象负责管理所有UIView的层次结构，并响应设备的方向变化&lt;br/&gt;17、&lt;br/&gt;@class 当一个类需要引用另一个类 &lt;br/&gt;demo.h  @class Rectangle;&lt;br/&gt;demo.m import Rectangle&lt;br/&gt;19、&lt;br/&gt;NSUserDefaults用于存储数据量小的数据，例如用户配置。并不是所有的东西都能往里放的，只支持：NSString,NSNumber, NSDate, NSArray, NSDictionary.&lt;br/&gt;NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];&lt;br/&gt;[defaults objectForKey:key]; 提取&lt;br/&gt;[defaults setObject:item forKey:key]; 设置&lt;br/&gt;[defaults removeObjectForKey:key]; 移除&lt;br/&gt;20、&lt;br/&gt;UITabBarController通常作为整个程序的rootViewController ,常见的创建地方就是在application delegate中的 applicationDidFinishLaunching:方法&lt;br/&gt;21、&lt;br/&gt;[NSFileManger defaultManger]  实例化&lt;br/&gt;NSFileManager中包含了用来查询单词库目录、创建、重命名、删除目录以及获取/设置文件属性的方法（可读性，可编写性等等）&lt;br/&gt;23、&lt;br/&gt;fileURLWithPath是将str转化为文件路径，可以自动的去掉“/”。而URLWithString仅仅是将url2转化成NSURL类型&lt;br/&gt;24、&lt;br/&gt;NSClassFromString 将NSString转换成一个Class,如果不存在，返回一个nil。&lt;br/&gt;[[NSClassFromString(@&quot;MyClass&quot;) alloc] init]; 优化版&lt;br/&gt;25、&lt;br/&gt;NSStringFromClass  实例对象转化字符串 &lt;br/&gt;[NSClassFromString(NSStringFromClass([self class])) doSomeThing]; &lt;br/&gt;26、&lt;br/&gt;viewDidLoad其实没什么可混淆的,无论通过什么途径加载(Xcode或者IB,这里的加载属于实例化)完view后肯定会执行这个方法. &lt;br/&gt;loadView需要分两种情况.当你通过Xcode实例化一个类的时候就需要自己在controller中实现这个方法.而在IB中实例化就不需要实现它. &lt;br/&gt;initWithNibName这个方法是在controller的类在IB中创建,但是通过Xcode实例化controller的时候用的. &lt;br/&gt;awakeFromNib是类在IB中被实例化调用.推荐使用viewDidLoad,因为viewDidLoad会被多次调用,而awakeFromNib只会当从nib文件中unarchive的时候才会被调用一次，awakeFromNib被调用时，viewDidLoad不会被调用&lt;br/&gt;27、&lt;br/&gt;UIBarButtonItem 工具栏按钮有3种主要的定制方法：1、在Interface builder中定制；2、setItems方法定制；3、addSubview方法定制。&lt;br/&gt;28、&lt;br/&gt;__bridge只做类型转换，但是不修改对象（内存）管理权；&lt;br/&gt;__bridge_transfer（也可以使用CFBridgingRelease）将Core Foundation的对象转换为Objective-C的对象，同时将对象（内存）的管理权交给ARC。&lt;br/&gt;29、&lt;br/&gt;__bridge_retained（也可以使用CFBridgingRetain）将Objective-C的对象转换为Core Foundation的对象，同时将对象（内存）的管理权交给我们，后续需要使用CFRelease或者相关方法来释放对象&lt;br/&gt;&lt;p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>9</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>NSObject 功能介绍</string>
+		<key>detail</key>
+		<string>&lt;p&gt;&lt;p&gt;NSObject是大多数Objective-C类的继承的根类，NSObject采用（adopts，或者说是继承实现）了NSObject协议（protocol）。NSObject协议（protocol）允许被多个根类（root class）采用，比如NSProxy另一根类（root class），并不是从NSObject继承，但却也采用了NSObject协议（protocol）所以它在Objective-C中便有了和NSObject类相似部分的类的定义（interface）和功能。&lt;/p&gt;1、Allocation, initialization, 和 duplication。一些NSObject方法（包括一些采用的协议）用来处理创建（creation），初始化（initialization）和复制（duplication）对象。&lt;br/&gt;2、alloc和allocWithZone:内存中为一个对象分配了内存空间并且设置它指向的对象的编译器类定义（即是告诉编译器定义了一个类）。&lt;br/&gt;3、init方法为对象的属性初始化（prototype），一个让实例变量初始化状态的进程。类方法中的initialize和load让一个类初始化它们自己。&lt;br/&gt;4、new一种方便的结合分配内存和初始化的方法。&lt;br/&gt;5、copy和copyWithZone:复制任意对象的内存（从NSCopying协议来的）;mutableCopy和mutableCopyWithZone:（在NSMutableCopying协议中定义）该类来完成易变的对象拷贝。&lt;br/&gt;6、retain方法，增加对象的计数器。&lt;br/&gt;7、release方法，减少对象的计数器&lt;br/&gt;8、autorelease方法，自动减少对象的计数器，但是以推迟的方式来实现。&lt;br/&gt;9、retainCount方法，返回一个对象当前的计数器&lt;br/&gt;10、dealloc方法应用于类来释放对象实例变量并释放动态内存。&lt;br/&gt;11、superclass和class方法（类和实例(class and instance)）分别返回接收器的父类和类，作为一个Class对象。&lt;br/&gt;12、isKindOfClass:和isMemberOfClass:，通过这两种方法可以确定一个类的从属关系。后者测试一个接收器是否是一个指定类的实例；而 前者可以测试类的从属关系。&lt;br/&gt;13、respondsToSelector: 测试一个接收器是否通过selector实现（implements）了一个标志符。而instancesRespondToSelector:测试了一个给定的类实例化之后（这个消息的接收方法为静态方法，译者注）是否实现了一个指定的方法。&lt;br/&gt;14、conformsToProtocol:方法，测试接收器（对象或者类）符合一个给定的协议（protocol）。&lt;br/&gt;15、isEqual: 和 hash方法，用于对象比较。&lt;br/&gt;16、description方法，允许一个对象返回一个字符串来描述它的内容；这个常用于调试debugging (“print  object”命令 ) 。通过“%@”以字符串输出特殊的指定对象。（即是以NSLog的形式输出）&lt;br/&gt;17、 Object encoding and decoding（对象的编码和解码）.接下来的方法将与对象的编码和解码方式有关 （作为一个归档处理的一部分）&lt;br/&gt;18、encodeWithCoder: 和 initWithCoder:方法，NSCoding协议中仅有的组成成员。第一个允许对象编译它的实例变量，第二个允许一个对象初始化它自身的解码实例变量。&lt;br/&gt;19、NSObject类声明了一些与对象编码相关的其它方法，有：classForCoder，replacementObjectForCoder，awakeAfterUsingCoder:。&lt;br/&gt;20、Message forwarding（消息转发）. forwardInvocation:允许一个对象把消息转发给另一个对象。&lt;br/&gt;21、Message dispatch（消息配送）. 一个以performSelector...为开头的方法允许你配送消息（message）直到指定的延迟后，并且可以从二级线程（(synchronously or asynchronously)同步或者不同步地）配送消息到主线程。&lt;br/&gt;22、NSObject拥有许多其它的方法，比如版本和传递的类方法（class methods for versioning and posing）。访问编译器数据结构的类，比如selector方法和函数指针形式的方法实现。&lt;br/&gt;&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>NSString 方法总结</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1、 - (NSUInteger)length; 返回字符串的长度&lt;br/&gt;2、 - (unichar)characterAtIndex:(NSUInteger)index; 返回在字符串中的某个位置的字符&lt;br/&gt;3、- (void)getCharacters:(unichar *)buffer range:(NSRange)aRange; 截取字符串指定段,返回类型unichar unichar buffer[6];&lt;br/&gt;4、- (NSString *)substringFromIndex:(NSUInteger)from;  截取指定位置后面的字符串&lt;br/&gt;5、- (NSString *)substringToIndex:(NSUInteger)to;  截取指定长度的字符串，从索引0开始&lt;br/&gt;6、- (NSString *)substringWithRange:(NSRange)range;   截取字符串指定段,返回类型NSString&lt;br/&gt;7、- (NSComparisonResult)compare:(NSString *)string;   比较字符串&lt;br/&gt;8、- (NSComparisonResult)caseInsensitiveCompare:(NSString *)string; 不区别大小比较&lt;br/&gt;9、- (BOOL)isEqualToString:(NSString *)aString; 测试两个字符串是否相等&lt;br/&gt;10、- (BOOL)hasPrefix:(NSString *)aString;  测试字符串是否以 nsstring 开始&lt;br/&gt;11、- (BOOL)hasSuffix:(NSString *)aString;  测试字符串是否以 nsstring 结尾&lt;br/&gt;12、- (NSRange)rangeOfString:(NSString *)aString; 搜索字符串One是否存在于字符串Two&lt;br/&gt;13、- (NSRange)rangeOfString:(NSString *)aString options:(NSStringCompareOptions)mask; 以某些限制条件搜索字符串One是否存在于字符串Two&lt;br/&gt;14、- (NSString *)stringByAppendingString:(NSString *)aString; 将字符串One添加字符串Two后面&lt;br/&gt;15、- (NSString *)stringByAppendingFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2); 将多个字符串添加字符串Two后面&lt;br/&gt;16、- (double)doubleValue; 返回转化的double类型&lt;br/&gt;17、- (float)floatValue;  返回转化的float类型&lt;br/&gt;18、- (int)intValue;  返回转化的int类型&lt;br/&gt;19、- (NSInteger)integerValue ;  返回转化的NSInteger&lt;br/&gt;20、- (long long)longLongValue ; 返回转化的 长int类型&lt;br/&gt;21、- (BOOL)boolValue ;   返回转化的 长BOOL类型&lt;br/&gt;22、- (NSArray *)componentsSeparatedByString:(NSString *)separator; 字符串转化为数组&lt;br/&gt;23、- (NSString *)uppercaseString; 所有字符转化为大写&lt;br/&gt;24、- (NSString *)lowercaseString; 所有字符转化为小写&lt;br/&gt;25、- (NSString *)capitalizedString; 所有单词首字母转化大写&lt;br/&gt;26、- (NSString *)stringByTrimmingCharactersInSet:(NSCharacterSet *)set;   字符串替换&lt;br/&gt;27、- (void)getLineStart:(NSUInteger *)startPtr end:(NSUInteger *)lineEndPtr contentsEnd:(NSUInteger *)contentsEndPtr forRange:(NSRange)range; 返回指定开始索引到结束索引，指定段的字符串&lt;br/&gt;28、- (NSRange)lineRangeForRange:(NSRange)range;返回字符串指定段的位置和长度 &lt;br/&gt;29、+ (id)stringWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2); 格式化出初始化NSString对象，会自动释放内存  直接 NSString *str = @&quot;abc&quot; 内存无法释放&lt;br/&gt;30、- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString;使用 aString替换 range 指定的区域段&lt;br/&gt;31、- (void)insertString:(NSString *)aString atIndex:(NSUInteger)loc;以索引loc为起始位置插入 aString&lt;br/&gt;32、- (void)deleteCharactersInRange:(NSRange)range;删除指定区域段字符&lt;br/&gt;33、- (void)appendString:(NSString *)aString;追加字符串aString&lt;br/&gt;34、- (void)appendFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);追加多个字符串（格式化)&lt;br/&gt;35、- (void)setString:(NSString *)aString;重新赋值&lt;br/&gt;36、- (NSDictionary *)propertyListFromStringsFileFormat;字符串转化为字典&lt;br/&gt;37、- (id)propertyList; 字符串转化为属性列表&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>11</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>NSArray方法总结</string>
+		<key>detail</key>
+		<string>&lt;p&gt;&lt;p&gt;NSArray是不可变的，NSMutableArray是可变的，而且只能储存Object-c对象，另外，数组的最后一个元素一定是《nil》表示结束.
+这些集合类只能收集cocoa对象（NSOjbect对象），如果想保存一些原始的C数据（例如，int, float, double, BOOL等），则需要将这些原始的C数据封装成NSNumber类型的，NSNumber对象是cocoa对象，可以被保存在集合类中。&lt;/p&gt;1、- (NSUInteger)count; 数组元素个数&lt;br/&gt;2、- (id)objectAtIndex:(NSUInteger)index; 返回指定索引的数组元素&lt;br/&gt;3、- (NSArray *)arrayByAddingObject:(id)anObject;追加对象&lt;br/&gt;4、- (NSArray *)arrayByAddingObjectsFromArray:(NSArray *)otherArray;  追加其他数组&lt;br/&gt;6、- (NSString *)componentsJoinedByString:(NSString *)separator;分割数组为字符串&lt;br/&gt;7、- (BOOL)containsObject:(id)anObject;判断数组是否存在指定元素&lt;br/&gt;8、- (NSString *)description; 格式化为一个属性列表&lt;br/&gt;9、- (NSString *)descriptionWithLocale:(id)locale;本地化格式化为一个属性列表&lt;br/&gt;10、- (NSString *)descriptionWithLocale:(id)locale indent:(NSUInteger)level;本地化格式化为一个属性列表（设置缩进）&lt;br/&gt;11、- (id)firstObjectCommonWithArray:(NSArray *)otherArray;取出array对象跟demo对象第一个交集元素&lt;br/&gt;12、- (void)getObjects:(id __unsafe_unretained [])objects range:(NSRange)range; 返回指定区域的对象&lt;br/&gt;13、- (NSUInteger)indexOfObject:(id)anObject; 获取指定元素的索引&lt;br/&gt;14、- (NSUInteger)indexOfObject:(id)anObject inRange:(NSRange)range;指定区域获取元素的索引&lt;br/&gt;15、- (NSUInteger)indexOfObjectIdenticalTo:(id)anObject;获取指定元素的索引&lt;br/&gt;16、- (NSUInteger)indexOfObjectIdenticalTo:(id)anObject inRange:(NSRange)range;指定区域获取元素的索引&lt;br/&gt;17、- (BOOL)isEqualToArray:(NSArray *)otherArray; 判断二个数组对象是否相等&lt;br/&gt;18、- (id)lastObject;取出数组最后一个元素&lt;br/&gt;19、- (NSData *)sortedArrayHint;升序排序数组元素&lt;br/&gt;20、- (NSArray *)sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator context:(void *)context; 调用指定方法排序数组元素&lt;br/&gt;21、- (NSArray *)sortedArrayUsingSelector:(SEL)comparator;指定比较方法排序数据元素&lt;br/&gt;22、	1.	- (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically;保存数组对象到指定URL&lt;br/&gt;23、+ (id)arrayWithContentsOfFile:(NSString *)path;从文件加载数据&lt;br/&gt;24、+ (id)arrayWithContentsOfURL:(NSURL *)url;从网络地址加载数据&lt;br/&gt;&lt;br/&gt;/**************** Mutable Array ****************/&lt;br/&gt;25、- (void)addObject:(id)anObject; 添加对象&lt;br/&gt;26、- (void)insertObject:(id)anObject atIndex:(NSUInteger)index; 指定索引位置插入对象&lt;br/&gt;27、- (void)removeLastObject;移除最后一个对象&lt;br/&gt;28、- (void)removeObjectAtIndex:(NSUInteger)index; 移除指定索引位置对象&lt;br/&gt;29、- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject;替换指定索引位置对象&lt;br/&gt;30、- (void)addObjectsFromArray:(NSArray *)otherArray; 追加数组A到数组B&lt;br/&gt;31、- (void)exchangeObjectAtIndex:(NSUInteger)idx1 withObjectAtIndex:(NSUInteger)idx2; 交互指定索引之间的对象&lt;br/&gt;32、- (void)removeObject:(id)anObject inRange:(NSRange)range;移除指定区域指定对象&lt;br/&gt;33、- (void)removeObjectsInArray:(NSArray *)otherArray;移除数组A包含的指定数组B元素&lt;br/&gt;34、- (void)removeObjectsInRange:(NSRange)range;移除指定区域所有对象&lt;br/&gt;35、- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray range:(NSRange)otherRange;指定(数组B的指定区域）的元素替换（数组A指定区域&lt;br/&gt;36、- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray指定(数组B)替换（数组A指定区域）的元素&lt;br/&gt;37、- (void)setArray:(NSArray *)otherArray;追加数组B到A&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>11</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>UIView 分析总结</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1、- (void)removeFromSuperview;  将当前视图从父视图和窗口移除，并且把它的响应事件的响应链移除。&lt;br/&gt;2、- (void)insertSubview:(UIView *)view atIndex:(NSInteger)index; 指定索引插入视图&lt;br/&gt;3、- (void)exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2; 指定索引交换子视图&lt;br/&gt;4、- (void)addSubview:(UIView *)view; 添加视图到最后&lt;br/&gt;5、- (void)insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview; 添加视图到底层&lt;br/&gt;6、- (void)insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview; 添加视图到顶层&lt;br/&gt;7、- (void)bringSubviewToFront:(UIView *)view;  将指定子视图推送前台（顶层）&lt;br/&gt;8、- (void)sendSubviewToBack:(UIView *)view;  将指定子视图推送到后台&lt;br/&gt;9、- (BOOL)isDescendantOfView:(UIView *)view;  // returns YES for self. 判断一个视图是否在父视图层中&lt;br/&gt;10、- (void)setNeedsLayout; 标记为需要重新布局，异步调用layoutIfNeeded刷新布局，不立即刷新，但layoutSubviews一定会被调用&lt;br/&gt;11、-setNeedsDisplay方法：标记为需要重绘，异步调用drawRect&lt;br/&gt;12、-setNeedsDisplayInRect:(CGRect)invalidRect方法：标记为需要局部重绘&lt;br/&gt;13、-drawRect:(CGRect)rect方法：重写此方法，执行重绘&lt;br/&gt;14、UIViewContentModeScaleToFill,  按比例填充整个View&lt;br/&gt;15、UIViewContentModeScaleAspectFit,  缩放内容到合适的大小，边界多余部分透明&lt;br/&gt;16、UIViewContentModeScaleAspectFill, 缩放内容填充到指定大小，边界多余的部分省略&lt;br/&gt;17、+ (void)setAnimationDuration:(NSTimeInterval)duration;  //设置动画时间， 时间参数为double类型 &lt;br/&gt;18、+ (void)setAnimationDidStopSelector:(SEL)selector; //当动画执行结束时，执行selector方法&lt;br/&gt;19、+ (void)setAnimationDelay:(NSTimeInterval)delay;       //设置动画延迟时间，单位秒&lt;br/&gt;20、UIViewAnimationCurveEaseInOut,         // slow at beginning and end 缓慢开始，中间加速，然后减速到结束&lt;br/&gt;21、UIViewAnimationCurveEaseIn,            // slow at beginning  缓慢开始，加速到结束&lt;br/&gt;22、UIViewAnimationCurveEaseOut,           // slow at end  加速开始，加速到结束&lt;br/&gt;23、UIViewAnimationCurveLinear  //正常速度&lt;br/&gt;24、+ (void)setAnimationBeginsFromCurrentState:(BOOL)fromCurrentState;  设置动画是否从当前状态开始播放。&lt;br/&gt;25、+ (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses;   设置动画块中的动画效果是否自动重复播放&lt;br/&gt;26、+ (void)setAnimationRepeatCount:(float)repeatCount;设置动画在动画模块中的重复次数&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>11</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>UIWindow分析总结</string>
+		<key>detail</key>
+		<string>&lt;p&gt;[1]、UIWindow是一种特殊的UIView（视图集合中的根view），每个UIWindow都有一个窗口等级（windowlevel）,通常在一个程序中只会有一个UIWindow，可以手动创建多个UIWindow。UIWindow在程序中主要起到三个作用：&lt;br/&gt;　　1、作为容器，包含app显示的所有视图&lt;br/&gt;　　2、传递触摸消息到程序中view和其他对象&lt;br/&gt;　　3、与UIViewController协同工作，方便完成设备方向旋转的支持&lt;br/&gt;[2]、通常我们可以采取两种方法将view添加到UIWindow中：&lt;br/&gt;　　1、addSubview&lt;br/&gt;　　直接将view通过addSubview方式添加到window中，程序负责维护view的生命周期以及刷新，但是并不会为去理会view对应的ViewController，因此采用这种方法将view添加到window以后，我们还要保持view对应的ViewController的有效性，不能过早释放。&lt;br/&gt;　　2、rootViewController&lt;br/&gt;　　rootViewController时UIWindow的一个遍历方法，通过设置该属性为要添加view对应的ViewController，UIWindow将会自动将其view添加到当前window中，同时负责ViewController和view的生命周期的维护，防止其过早释放。&lt;br/&gt;       3、keyWindow ： BOOL 类型，只读，用于判断是否是当前应用的 key window (key window 是指可接收到键盘输入及其他非触摸事件的 UIWindow，一次只能有一个 key window)&lt;br/&gt;       4、windowLevel ：UIWindowLevel 类型，多个 UIWindow 的显示顺序是按照 windowLevel 从高到低排列的，windowLevel 最高的显示在最前面。比如：windowLevel 较高的 UIAlertView 警告窗口会显示在一般窗口的前面。&lt;br/&gt;	1)- (void)becomeKeyWindow; 调用窗口，使之变成关键窗口&lt;br/&gt;	2)- (void)resignKeyWindow; 调用窗口，使之取消关键窗口&lt;br/&gt;	3)- (void)makeKeyWindow;   使之成为主窗口 &lt;br/&gt;	4)- (void)makeKeyAndVisible;  使之成为主窗口，并且显示&lt;br/&gt;	5)- (void)sendEvent:(UIEvent *)event;   事件拦截分发到指定视图对象&lt;br/&gt;	6)- (CGPoint)convertPoint:(CGPoint)point toWindow:(UIWindow *)window;   转化当前窗口一个坐标相对另外一个窗口的坐标&lt;br/&gt;7、- (CGPoint)convertPoint:(CGPoint)point fromWindow:(UIWindow *)window;  转化另外窗口一个坐标相对于当前窗口的坐标&lt;br/&gt;8、- (CGRect)convertRect:(CGRect)rect toWindow:(UIWindow *)window;   转化当前窗口一个矩形坐标相对另外一个窗口的坐标&lt;br/&gt;9、- (CGRect)convertRect:(CGRect)rect fromWindow:(UIWindow *)window; 转化另外窗口一个矩形坐标相对于当前窗口的坐标&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>代码中字符串换行</string>
+		<key>detail</key>
+		<string>&lt;p&gt;NSString *string = @&quot;ABC&quot; \&lt;br/&gt;
+			          &quot;DEF&quot;;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>闪烁一下滚动条，暗示用户有可滚动的内容</string>
+		<key>detail</key>
+		<string>flashScrollIndicators</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>点击cell中的按钮时，获取所在cell</string>
+		<key>detail</key>
+		<string>&lt;p&gt;// 在按钮点击时间中添加以下代码（此方法也适用于其他控件如ScrollView中）&lt;/p&gt;&lt;p&gt;
+CGPoint point = btn.center;&lt;/p&gt;&lt;p&gt;
+point = [table convertPoint:point fromView:btn.superview];&lt;/p&gt;&lt;p&gt;
+NSIndexPath*  indexpath = [table indexPathForRowAtPoint:point];&lt;/p&gt;&lt;p&gt;
+UITableViewCell *cell  =  [table  cellForRowAtindexPath:indexpath];&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>App程序运行时不自动锁屏</string>
+		<key>detail</key>
+		<string>[[UIApplication  sharedApplication]  setIdleTimeDisabled:YES];</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>addSubview不支持 Animation</string>
+		<key>detail</key>
+		<string>&lt;/p&gt;assSubView和 removeFromSuperview是不支持animation的。要实现动画效果，就需要利用alpha这个变量。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>盘点IOS应用提交到APP Store被拒的79个原因，史上最全！</string>
+		<key>detail</key>
+		<string>&lt;p&gt;APP被苹果APPStore拒绝的各种原因&lt;/p&gt;&lt;p&gt;
+1、程序有重大bug，程序不能启动，或者中途退出。&lt;/p&gt;&lt;p&gt;
+2、绕过苹果的付费渠道，我们之前游戏里的用兑换码兑换金币。&lt;/p&gt;&lt;p&gt;
+3、游戏里有实物奖励的话，一定要说清楚，奖励由本公司负责，和苹果没有关系。&lt;/p&gt;&lt;p&gt;
+4、用到苹果的标志。（应用的设计和Apple的Logo风格太像了也会被拒）&lt;/p&gt;&lt;p&gt;
+5、网络功能不能正常访问。&lt;/p&gt;&lt;p&gt;
+6、图标不能点击，不能点击的图标要置灰，或者直接隐藏。&lt;/p&gt;&lt;p&gt;
+7、没有设置default页，启动画面为黑屏，有一定概率被拒绝。&lt;/p&gt;&lt;p&gt;
+8、一个应用在线，但你想在发一个豪华版之类的，再开一个应用也会被拒绝。&lt;/p&gt;&lt;p&gt;
+9、用了著名游戏的关键字，比如说“愤怒的小鸟”之类的。&lt;/p&gt;&lt;p&gt;
+10、iPhone版不支持480*320分辨率被决绝。&lt;/p&gt;&lt;p&gt;
+11、娱乐分类App，拒绝理由：我们认为你的App不具有娱乐性。&lt;/p&gt;&lt;p&gt;
+12、你的软件不符合中国法律，还打电话来跟我说。（奶奶的，中国哪个法律说不可以翻墙。）&lt;/p&gt;&lt;p&gt;
+13、技术支持地址写的微博地址，于是被拒绝了。原因是：不能将需要登陆才能访问的网址作为技术支持地址。&lt;/p&gt;&lt;p&gt;
+14、说我们的应用不该用App开发，应该用HTML5。（而且还很热心的给出了参考链接哦）&lt;/p&gt;&lt;p&gt;
+15、调用截屏功能,当时没注意,是私有API,被拒.改成非私有API实现截屏功能就通过了.&lt;/p&gt;&lt;p&gt;
+16、开放了文件document分享功能(Application supports iTunes file sharing),被退回,理由:不需要分享,为何开放了.回复邮件说明理由后上线.&lt;/p&gt;&lt;p&gt;
+17、年龄设置太低,说是有成人内容,被拒.修改内容后上线.&lt;/p&gt;&lt;p&gt;
+18、同一软件多个版本只是针对不同的国家和内置的语言不同.前面几个上线,后面几个被拒.让改成一个程序做程序内下载资源.&lt;/p&gt;&lt;p&gt;
+19、程序有crash被拒.修改bug后上线.&lt;/p&gt;&lt;p&gt;
+20、原因是我们的一个软件只允许联通用户验证真实身份并发布信息。apple要求要么放弃验证，要么允许移动和电信用户验证。&lt;/p&gt;&lt;p&gt;
+21、APP中出现了某本以乔布斯为封面的本集团出版物图片，遭拒。回复曰：Thank you for submitting your app commemorating Steve Jobs.
+We appreciate your efforts honoring Steve. However, we’ve decided to honor his life in other ways and we are not accepting these types of apps.&lt;/p&gt;&lt;p&gt;
+22、原来做过一个显示假电池的App, 就是显示一个假的的电量, 这样别人找你借手机就可以以没电了为理由不借给他. 结果App Store说会迷惑用户, 让我改简介. 改为简介后苹果中国给我打电话说这个App不用再提交了, 不可能过, 会迷惑用户… 我了个去的 于是这个App就一直存在在我的iTunes Connect里.&lt;/p&gt;&lt;p&gt;
+23、忘记提供测试账号。（如果你的APP有登录功能）&lt;/p&gt;&lt;p&gt;
+24、软件有个vip功能，涉嫌应用内收费。&lt;/p&gt;&lt;p&gt;
+25、拨打电话，涉嫌扣费。&lt;/p&gt;&lt;p&gt;
+26、图片如果比较清凉的话需要设置软件级别。&lt;/p&gt;&lt;p&gt;
+27、平板应用要支持最少2个翻转方向。&lt;/p&gt;&lt;p&gt;
+28、程序内按钮设计成标准的iOS icon。&lt;/p&gt;&lt;p&gt;
+29、内置付费的内容要明确告诉需要购买，购买前不能摆出来（这个属于运气不好，同样这么做的app很多）&lt;/p&gt;&lt;p&gt;
+30、提交旗下一款新应用，为统一旗下各个产品的品牌识别，采取了与上一款产品相似的色调和logo结构。苹果拒绝理由是不知道这两款产品有什么区别（其实区别点进去就很明显，连UI布局都大相径庭）。&lt;/p&gt;&lt;p&gt;
+31、应用内涉及到抽奖的运营活动，未声明与苹果官方无关。&lt;/p&gt;&lt;p&gt;
+33、自认为第一版产品还不够完善，于是过度谦虚地在启动画面加上了“beta”字样。苹果的反馈是，不允许测试版产品上架。囧，后来翻了一下 Review Guideline 似乎是有提到这点的。&lt;/p&gt;&lt;p&gt;
+34、链接堆砌，苹果建议用HTML5来做&lt;/p&gt;&lt;p&gt;
+35、UIWebView 嵌页面片，苹果建议让用户通过浏览器访问，比如爱知乎，开始几个版本通过了，后面的更新一直没提交上去屏幕坏点检测应用，苹果说会误导用户，未上架&lt;/p&gt;&lt;p&gt;
+36、登陆账号有两个字母写反了，改正后通过&lt;/p&gt;&lt;p&gt;
+37、因远程服务器反应慢，苹果的人估计没耐心等，就说有bug给拒了，重新提交一份通过&lt;/p&gt;&lt;p&gt;
+38、应用标题加了几个描述语句，苹果让在描述中写明达到此目的的操作流程，改正后通过&lt;/p&gt;&lt;p&gt;
+39、一个第三方的应用，描述文字中有该网站的链接，进去网站后能找到付费链接，苹果说该网站有自己的支付方式，去除网址后通过&lt;/p&gt;&lt;p&gt;
+40、应用请求使用地理位置的权限，但相关功能藏得比较深，Apple说没找到相关的功能。 — 回信说明后通过&lt;/p&gt;&lt;p&gt;
+41、应用描述中提到了是全平台应用，可以和其他系统同步数据。因为提到了“Android”的字眼被拒。 — 修改描述后通过&lt;/p&gt;&lt;p&gt;
+42、 App 的User Agreement中出现了 Beta、Preliminary 等字样。因为是发布第一个版本，产品带有一定的beta性质，但是确实是可发布产品了。按照公司LEGAL部门（外企，对User Agreement要求严格）的要求，必须有类似Beta的说明告知用户，而 Apple 是明确不允许有 Beta 性质的字样的。&lt;/p&gt;&lt;p&gt;
+43、App 是一个机遇小区的社区工具，顺便做了房产广告，但是 apple 审核说是广告app，不允许发布。&lt;/p&gt;&lt;p&gt;
+44、应用里有个去给我们打分的功能，被拒了。。（这是不是史上最坑爹的拒绝理由）&lt;/p&gt;&lt;p&gt;
+45、网络工具软件，要求支持国外的电信运营商网络。&lt;/p&gt;&lt;p&gt;
+46、曾经做一个 Chinajoy 美女图片 show 的，被认为不适合放在 App Store。&lt;/p&gt;&lt;p&gt;
+47、iOS 5 的数据存储问题…网络下载的资源不能直接搞在Documents目录下。这个反复整了5次左右才通过审核。&lt;/p&gt;&lt;p&gt;
+48、忘记提供测试账号……（审核的大爷们你们就不能自己弄个或者注册个账号么）&lt;/p&gt;&lt;p&gt;
+49、还有一次被拒，我回复说你们所说的问题不存在……后来……通过审核了。-.-&lt;/p&gt;&lt;p&gt;
+50、菜单中有一个文字包含测试，被打回，说不能上测试版本。&lt;/p&gt;&lt;p&gt;
+51、app名字包含pad，被打回，说容易名字不能有pad，会被误解为苹果自己的应用，不过同名的iphone版本就通过了…&lt;/p&gt;&lt;p&gt;
+52、upport地址在safari（仅仅是safari）下由于适配性问题打不开，结果就收到了apple的来信。&lt;/p&gt;&lt;p&gt;
+53、app里做了次抽奖，奖品是iphone4s，结果他们必须要我们将奖品改成别的，同时申明此活动与苹果公司无关，才可以上架。。。&lt;/p&gt;&lt;p&gt;
+54、app里做了次抽奖，奖品是iphone4s，结果他们必须要我们将奖品改成别的，同时申明此活动与苹果公司无关，才可以上架。。。&lt;/p&gt;&lt;p&gt;
+55、在程序的说明信息中有“越狱”俩字，被拒，后来把这俩字去了，PASS。但是：如果我在程序运行中检测出手机越狱了，这结果报出来让不让过？&lt;/p&gt;&lt;p&gt;
+56、使用GPS常驻后台服务，要我给出一个合适的理由，否则不往下审核，还好，解释一翻过去了。&lt;/p&gt;&lt;p&gt;
+57、出现“给我们五星好评”之类的文字。&lt;/p&gt;&lt;p&gt;
+58、应用内提到付费项目但木有通过苹果付费渠道（妄图不让苹果老大赚钱）&lt;/p&gt;&lt;p&gt;
+59、问我服务是不是只在IOS平台，还是同时支持多平台（我当然拥护苹果老大的领导，木有其他平台，iPhone专属）&lt;/p&gt;&lt;p&gt;
+60、地图应用，Google大神的LOGO没有显示。&lt;/p&gt;&lt;p&gt;
+61、google地图下面logo被一个UIView给遮挡了被拒。调整位置后ok&lt;/p&gt;&lt;p&gt;
+62、对不存在普遍比较标准的几类人进行比较和评判。不比人比动物后ok&lt;/p&gt;&lt;p&gt;
+63、上传通讯录没有通知。这个等了几个月，苹果的法律纠纷差不多了之后拒掉。然后加了提示后ok。&lt;/p&gt;&lt;p&gt;
+64、我写的英文App介绍审核人员看不懂，被拒。后然直接用中文。唉。&lt;/p&gt;&lt;p&gt;
+65、因为上行短信实现用户认证被拒&lt;/p&gt;&lt;p&gt;
+66、果测试人员的手机号在国外，因为收不到国内短信，被拒&lt;/p&gt;&lt;p&gt;
+67、他们打开我的一个APP测试，显示空白无内容，哈哈，因为他们相册里没有960*640的图，就说我该程序功能没开发完毕吧？&lt;br/&gt;
+然后我回了信，然后第二天就上架了。虽然这个小应用是极其简单的。&lt;/p&gt;&lt;p&gt;
+68、最蛋疼的是，提供了测试用户帐号密码，被我们某个手贱的测试人员测试修改密码的时候给改掉了。。。于是苹果登录不进来，于是杯具&lt;/p&gt;&lt;p&gt;
+69、IAP价格不能超过99美金（其中有一个是99.99美元，你妹啊！！！！！！！你麻痹多出0.99美金啊！！人家游戏都可以有啊！！！！为什么我们就不行啊！！！）&lt;/p&gt;&lt;p&gt;
+70、不能强迫用户注册（网络游戏啊亲！！你妹有直接登陆的按钮啊！！！不需要注册的啊！！试一下会shi啊！！！！）&lt;/p&gt;&lt;p&gt;
+71、support URL无法访问（草草草草草！！！那几天GFW抽风，海外访问国内网站有问题，你妹躲在香港的体谅一下大陆人民啊！！！）&lt;/p&gt;&lt;p&gt;
+72、没有生成Paid iOS合同（游戏内含IAP，好吧，这个是合作公司搞的乌龙，就不吐槽苹果了）&lt;/p&gt;&lt;p&gt;
+73、某微博客户端，提供了测试账号，被拒的理由是「账号登录不进去」，还有截屏，我一看，这不把我们提供的测试账号的最后两个字母写反了么…赶紧反馈，之后三天才继续审核，这三天真是太赔了。&lt;/p&gt;&lt;p&gt;
+74、某门户新闻客户端，免费应用，被拒的理由是「找不到in app purchase的项目对应的界面」，可是我们的应用跟本没有应用内支付，继续反馈…又等了三天…&lt;/p&gt;&lt;p&gt;
+75、iPhone Human Interface Guidelines中指出了基本UI控件应该如何正确地使用。我们应该按照它的要求来检查Tab Bar、Navigation Bar和Alert View等控件是否符合Apple的口味。&lt;/p&gt;&lt;p&gt;
+76、确保应用不要模仿设备预装应用的样式和功能，如Music、iTunes Music Store和App Store等。这一条规则似乎是选择性实施的，因为许多浏览器和指南针类的应用都得到了批准。&lt;/p&gt;&lt;p&gt;
+77、不要加入过多脏话、无理由的性爱场面和吸毒场面。&lt;/p&gt;&lt;p&gt;
+78、不要对硬件按钮进行重新编程，赋予其它功能。例如，不要将音量按钮作为照相应用的快门键，不要将home键作为游戏中的开火键。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>ScrollView使用时的注意，设置contentSize没有用的问题</string>
+		<key>detail</key>
+		<string>&lt;/p&gt;autoLayout的话，不要在viewDidLoad里写setContentSize，放到类似Appear之类的里面去。&lt;/p&gt;&lt;/p&gt;
+因为在viewDidLoad的时候view实际上还没有加到window上，这个时候setContentSize没有用，view会在viewDidLoad和viewWillAppear之间加载到window上。所以卸载willAppear或者didAppear都可以。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+</array>
+</plist>

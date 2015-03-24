@@ -8,7 +8,7 @@
 		<key>imageName</key>
 		<string>sidebar_nav_news</string>
 		<key>title</key>
-		<string>资讯</string>
+		<string>新闻资讯</string>
 	</dict>
 	<dict>
 		<key>className</key>
@@ -22,7 +22,7 @@
 		<key>className</key>
 		<string>ZDShareViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>sidebar_nav_comment</string>
 		<key>title</key>
 		<string>分享交流</string>
 	</dict>
@@ -30,7 +30,7 @@
 		<key>className</key>
 		<string>ZDUIViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>sidebar_nav_audio</string>
 		<key>title</key>
 		<string>UI基础</string>
 	</dict>
@@ -38,7 +38,7 @@
 		<key>className</key>
 		<string>ZDMemoryViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>sidebar_nav_vote</string>
 		<key>title</key>
 		<string>内存管理</string>
 	</dict>
@@ -46,47 +46,47 @@
 		<key>className</key>
 		<string>ZDNetViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>xiancheng</string>
 		<key>title</key>
-		<string>线程网络</string>
+		<string>多线程网络</string>
 	</dict>
 	<dict>
 		<key>className</key>
-		<string>ZDNetViewController</string>
+		<string>ZDFoundationViewController</string>
 		<key>imageName</key>
 		<string>sidebar_nav_photo</string>
 		<key>title</key>
-		<string>设计模式</string>
+		<string>Foundation</string>
 	</dict>
 	<dict>
 		<key>className</key>
-		<string>ZDNetViewController</string>
+		<string>ZDEnglishViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
-		<key>title</key>
-		<string>英文题</string>
-	</dict>
-	<dict>
-		<key>className</key>
-		<string>ZDHotViewController</string>
-		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>hot</string>
 		<key>title</key>
 		<string>热门技术</string>
 	</dict>
 	<dict>
 		<key>className</key>
-		<string>ZDNetViewController</string>
+		<string>ZDHotViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>yingwen</string>
 		<key>title</key>
 		<string>项目实战</string>
 	</dict>
 	<dict>
 		<key>className</key>
+		<string>ZDXiangMuViewController</string>
+		<key>imageName</key>
+		<string>sidebar_nav_focus</string>
+		<key>title</key>
+		<string>面试问答</string>
+	</dict>
+	<dict>
+		<key>className</key>
 		<string>ZDMoreViewController</string>
 		<key>imageName</key>
-		<string>sidebar_nav_photo</string>
+		<string>gengduoa</string>
 		<key>title</key>
 		<string>更多</string>
 	</dict>

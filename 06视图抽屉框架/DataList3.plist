@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>#import 跟#include、@class有什么区别？＃import&lt;&gt; 跟 #import”&quot;又什么区别？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;#import和#include都能完整地包含某个文件的内容，#import能防止同一个文件被包含多次&lt;br/&gt;@class仅仅是声明一个类名，并不会包含类的完整声明;@class还能解决循环包含的问题&lt;br/&gt;#import &lt;&gt; 用来包含系统自带的文件，#import “”用来包含自定义的文件&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>对于语句NSString*obj = [[NSData alloc] init]; ，编译时和运行时obj分别是什么类型？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	编译时是NSString类型&lt;br/&gt;•	运行时是NSData类型&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>常见的object-c的数据类型有那些， 和C的基本数据类型有什么区别？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	常用OC类型：NSString、NSArray、NSDictionary、NSData、NSNumber等&lt;br/&gt;•	OC对象需要手动管理内存，C的基本数据类型不需要管理内存&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>自己怎么实现原子锁</string>
+		<key>detail</key>
+		<string>&lt;p&gt;因为iOS程序只能在主线程中修改UI , iOS中一般用nonaotomic, 直接告诉面试官只用过系统的synchronized和NSCondition.&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>runloop定时源和输入源</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	你创建的程序不需要显示的创建run loop；每个线程，包括程序的主线程（main thread）都有与之相应的run loop对象, 主线程会自行创建并运行run loop&lt;br/&gt;•	Run loop处理的输入事件有两种不同的来源：输入源（input source）和定时源（timer source）&lt;br/&gt;•	输入源传递异步消息，通常来自于其他线程或者程序。定时源则传递同步消息，在特定时间或者一定的时间间隔发生&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>NSRunLoop的实现机制,及在多线程中如何使用</string>
+		<key>detail</key>
+		<string>&lt;p&gt;NSRunLoop是IOS消息机制的处理模式&lt;br/&gt;&gt;1.NSRunLoop的主要作用：控制NSRunLoop里面线程的执行和休眠，在有事情做的时候使当前NSRunLoop控制的线程工作，没有事情做让当前NSRunLoop的控制的线程休眠。&lt;br/&gt;&gt;2.NSRunLoop 就是一直在循环检测，从线程start到线程end，检测inputsource(如点击，双击等操作)异步事件，检测timesource同步事件，检测到输入源会执行处理函数，首先会产生通知，corefunction向线程添加runloop observers来监听事件，意在监听事件发生时来做处理。&lt;br/&gt;&gt;3.runloopmode是一个集合，包括监听：事件源，定时器，以及需通知的runloop observers&lt;br/&gt;&gt;1. 只有在为你的程序创建次线程的时候，才需要运行run loop。对于程序的主线程而言，run loop是关键部分。Cocoa提供了运行主线程run loop的代码同时也会自动运行run loop。IOS程序UIApplication中的run方法在程序正常启动的时候就会启动run loop。如果你使用xcode提供的模板创建的程序，那你永远不需要自己去启动run loop&lt;br/&gt;&gt;2. 在多线程中，你需要判断是否需要run loop。如果需要run loop，那么你要负责配置run loop并启动。你不需要在任何情况下都去启动run loop。比如，你使用线程去处理一个预先定义好的耗时极长的任务时，你就可以毋需启动run loop。Run loop只在你要和线程有交互时才需要&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>简单说一下APP的启动过程,从main文件开始说起</string>
+		<key>detail</key>
+		<string>&lt;p&gt;程序启动分为两类:1.有storyboard 2.没有storyboard&lt;br/&gt;storyboard情况下:&lt;br/&gt;1.main函数&lt;br/&gt;2.UIApplicationMain&lt;br/&gt;
+* 创建UIApplication对象&lt;br/&gt;* 创建UIApplication的delegate对象&lt;br/&gt;3.根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(有storyboard)&lt;br/&gt;* 创建UIWindow&lt;br/&gt;* 创建和设置UIWindow的rootViewController&lt;br/&gt;* 显示窗口&lt;br/&gt;有storyboard情况下:&lt;br/&gt;1.main函数&lt;br/&gt;2.UIApplicationMain&lt;br/&gt;* 创建UIApplication对象&lt;br/&gt;* 创建UIApplication的delegate对象&lt;br/&gt;3.delegate对象开始处理(监听)系统事件(没有storyboard)&lt;br/&gt;* 程序启动完毕的时候, 就会调用代理的&lt;br/&gt;application:didFinishLaunchingWithOptions:方法&lt;br/&gt;* 在application:didFinishLaunchingWithOptions:中创建UIWindow&lt;br/&gt;* 创建和设置UIWindow的rootViewController&lt;br/&gt;* 显示窗口&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>如何渲染自定义格式字符串的UILabel</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; 通过NSAttributedString类&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>category和extension区别</string>
+		<key>detail</key>
+		<string>&lt;p&gt;*有没有名字&lt;br/&gt;*是否可以添加属性(变量)&lt;br/&gt;*extension里声明的方法需要在implementation中实现，category不强制要求&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>runtime怎么添加属性方法</string>
+		<key>detail</key>
+		<string>&lt;p&gt;* class_addProperty&lt;br/&gt;* class_addMethod&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>请介绍一下isa指针,怎么用,用来干嘛!!!</string>
+		<key>detail</key>
+		<string>&lt;p&gt;*每一个对象内部都有一个isa指针,对象的isa 指针就指向它的真实类型它所属的类.&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>c和obj-c如何混用</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1）obj-c的编译器处理后缀为m的文件时，可以识别obj-c和c的代码，处理mm文件可以识别obj-c,c,c++代码，&lt;br/&gt; 但cpp文件必须只能用c/c++代码，而且cpp文件include的头文件中，也不能出现obj- c的代码，因为cpp只是cpp。&lt;br/&gt;2) 在mm文件中混用cpp直接使用即可，所以obj-c混cpp不是问题&lt;br/&gt;3）在cpp中混用obj- c其实就是使用obj-c编写的模块是我们想要的。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是键-值,键路径是什么</string>
+		<key>detail</key>
+		<string>&lt;p&gt;模型的性质是通过一个简单的键（通常是个字符串）来指定的。视图和控制器通过键来查找相应的属性值。&lt;br/&gt;在一个给定的实体中，同一个属性的所有值具有相同的数据类型。&lt;br/&gt;键-值编码技术用于进行这样的查找—它是一种间接访问对象属性的机制。&lt;br/&gt;键路径是一个由用点作分隔符的键组成的字符串，用于指定一个连接在一起的对象性质序列。第一个键的性质是由先前的性质决定的，接下来每个键的值也是相对于其前面的性质。键路径使您可以以独立于模型实现的方式指定相关对象的性质。通过键路径，您可以指定对象图中的一个任意深度的路径，使其指向相关对象的特定属性。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>static 关键字的作用：</string>
+		<key>detail</key>
+		<string>&lt;p&gt;（1）函数体内 static 变量的作用范围为该函数体，不同于 auto 变量，该变量的内存只被分配一次，&lt;br/&gt;因此其值在下次调用时仍维持上次的值； &lt;br/&gt;（2）在模块内的 static 全局变量可以被模块内所用函数访问，但不能被模块外其它函数访问；&lt;br/&gt; （3）在模块内的 static 函数只可被这一模块内的其它函数调用，这个函数的使用范围被限制在声明它的模块内； &lt;br/&gt;4）在类中的 static 成员变量属于整个类所拥有，对类的所有对象只有一份拷贝； &lt;br/&gt;（5）在类中的 static 成员函数属于整个类所拥有，这个函数不接收 this 指针，因而只能访问类的static 成员变量。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>响应者链条</string>
+		<key>detail</key>
+		<string>&lt;p&gt;当有触摸事件发生时会被事件循环捕捉,然后通UIApplication查看是否落在UIWindow中如果没有再递归找下一层.找到后再递归传给UIApplication事件循环.告诉系统具体响应者.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>利用运行时动态绑定机制告诉系统如何归档和解档.</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1).首先或者指定类中的所有属性.保存在运行时的成员变量Ivar数组中.&lt;br/&gt;class_copyIvarList([self  class], &amp;count);&lt;br/&gt;2).循环遍历取出每一个属性.&lt;br/&gt;Ivar var = vars[i];&lt;br/&gt;3).取出属性名称.转换成OC字符串&lt;br/&gt;const char *varName = ivar_getName(var);&lt;br/&gt;4).根据属性的值解归档对象&lt;br/&gt;[NSString  stringWithUTF8String:varName];&lt;br/&gt;5).设置对象属性的值.&lt;br/&gt;[self  setValue:value   forKeyPath];&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>.notification是同步还是异步?KVO是同步还是异步?notification是全进程空间通知吗?kvo呢?</string>
+		<key>detail</key>
+		<string>	&lt;p&gt;notification center是使用同步的传递一个notification给它的观察者们,代理比其他两个效率高,代理需要关注返回值,其他两个只负责发出通知,代理是一对一,其他可以一对多&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>写一个宏定义每年有多少秒.</string>
+		<key>detail</key>
+		<string>	&lt;p&gt;#define SECONDS_PER_YEAR (60 * 60 * 24 * 365)UL&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>沙盒中的4个文件夹分别是什么,持久化数据一般存储在什么位置,如何获取路径?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;Documents:所有的应用程序数据文件都写入到这个目录瞎.这个目录用于存储用户数据或其它应该定期备份的数据.&lt;br/&gt;Cache中的Library--Preferences:包含应用程序的偏好设置文件,应该使用NSUserDefaults类来取得和设置应用程序的偏好.&lt;br/&gt;Cache中的Library--Caches:保存应用程序再次启动过程中需要的信息.&lt;br/&gt;Tmp: 存放临时文件,保存应用程序再次启动过程中不需要的信息.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>KVO底层实现原理</string>
+		<key>detail</key>
+		<string>&lt;p&gt;注册监听后,当A对象的某个属性被修改的时候系统会自动通知A对象,KVO的实现原理是通过runtime,在程序运行过程中系统会自动通过runtime给被监听的对象动态的创建一个子类,并且会重写子类的set方法,在set方法中调用监听者的observeValueForKeyPath方法&lt;br/&gt;KVO指定监听通过set方法修改的属性,如果直接修改是监听不到的&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>8</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>SD_webimage底层实现</string>
+		<key>detail</key>
+		<string>&lt;p&gt;定义图片字典,key值作为图片下载地址,value作为下载好的图片
+再定义操作字典,key值作为图片下载地址,value作为下载操作&lt;br/&gt;1.先从已下载字典中取,判断图片是否已经下载过了&lt;br/&gt;2.然后在每次开启新线程下载之前,检查一下当前路径是否有线程在下载了.&lt;br/&gt;
+3.如果没有开启子线程下载图片.下载完成后保存图片到图片字典.回到主线程更新UI.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>8</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>单例模式</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.定义一个静态变量保存实例&lt;br/&gt;static id _instance;&lt;br/&gt;
+2.重写allocWithZone方法,在该方法中保证该对象只分配一次存储空间&lt;br/&gt;+ （id）allocWithZone:(struct _NSZone *)zone{&lt;br/&gt;        static dispatch_once_t onceToken;&lt;br/&gt;        dispatch_once(&amp;onceToken, ^{&lt;br/&gt;        _instance = [super allocWithZone:zone];&lt;br/&gt;})&lt;br/&gt;return _instance;&lt;br/&gt;}&lt;/p&gt;&lt;br/&gt;提供一个类方法快速返回一个创建好的实例&lt;br/&gt;&lt;p&gt;+（instancetype）sharedAudioTool{&lt;br/&gt;static dispatch_once_t onceToken;&lt;br/&gt;dispatch_once(&amp;onceToken, ^{&lt;br/&gt;_instance = [[ZDAudioTool alloc]init];&lt;br/&gt;})&lt;br/&gt;reutrn _instance;&lt;br/&gt;}&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Foundation对象与Core Foundation对象有什么区别</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; Foundation对象是OC的，Core Foundation对象是C对象&lt;br/&gt;
+2&gt; 数据类型之间的转换&lt;br/&gt;ARC:__bridge_retained、__bridge_transfer&lt;br/&gt;非ARC: __bridge&lt;/p&gt;
+
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>@synthesize 合成指令的使用及用处</string>
+		<key>detail</key>
+		<string>	&lt;p&gt;用于指定声明对应的成员变量 如子类的dict属性,使用的成员变量名称是_dict;&lt;br/&gt;@synthesize dict = _dict;  可以在子类中使用父类的变量 和重写set方法&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是coredata？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：coredata框架是apple提供的一套通用自动的解决方案，包括了对象生存周期、对象关系图、持久化机制。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是NSManagedObject模型？什么是NSManagedobjectContext？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：NSManagedObject是NSObject的子类 ，也是coredata的重要组成部分，它是一个通用的类,实现了core data 模型层所需的基本功能，用户可通过子类化NSManagedObject，建立自己的数据模型。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>目标-动作机制</string>
+		<key>detail</key>
+		<string>&lt;p&gt;目标是动作消息的接收者。一个控件，或者更为常见的是它的单元，以插座变量（参见&quot;插座变量&quot;部分）的形式保有其动作消息的目标。&lt;br/&gt;动作是控件发送给目标的消息，或者从目标的角度看，它是目标为了响应动作而实现的方法。&lt;br/&gt;程序需要某些机制来进行事件和指令的翻译。这个机制就是目标-动作机制。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>MVC是什么？有什么特性？为什么在iPhone上被广泛运用？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：MVC设计模式考虑三种对象：模型对象、视图对象、和控制器对象。模型对象代表 特别的知识和专业技能，它们负责保有应用程序的数据和定义操作数据的逻辑。视图对象知道如何显示应用程序的模型数据，而且可能允许用户对其进行编辑。控制 器对象是应用程序的视图对象和模型对象之间的协调者。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>写一个NSString类的实现</string>
+		<key>detail</key>
+		<string>&lt;p&gt;+ (id)initWithCString:(const char*)nullTerminatedCString encoding:(NSStringEncoding)encoding{&lt;br/&gt; NSString*obj;&lt;br/&gt;obj= [self allocWithZone: NSDefaultMallocZone()];&lt;br/&gt;obj= [obj initWIthCString: nullTerminatedCString encoding: encoding];&lt;br/&gt;returnAUTORELEASE(obj);&lt;br/&gt;}&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>写一个委托的interface</string>
+		<key>detail</key>
+		<string>&lt;p&gt;@protocol MyDelegate;&lt;br/&gt;@interface MyClass: NSObject
+{&lt;br/&gt;id&lt;MyDelegate&gt; delegate;&lt;br/&gt;}&lt;br/&gt;@protocol MyDelegate&lt;br/&gt;- (void)didJobs:(NSArray *)args;&lt;br/&gt;@end &lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>obj-c有私有方法么?私有变量呢?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答：在Objective-C中没有私有方法，只有静态方法和实例方法。但是可以用@private修饰私有变量。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Foundation和CoreFoundation框架对象通过什么关键字进行转换</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; Foundation框架中的数据类型前缀是NS，CoreFoundation的数据类型前缀是CF&lt;br/&gt;2&gt;   使用 __bridge 关键字进行桥接&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>是否能将比较耗时的操作放在NSNotificationCenter中的处理？为什么？怎么处理？</string>
+		<key>detail</key>
+		<string>&lt;p&gt; 1&gt; 不能&lt;br/&gt; 2&gt; 通知中心所做的操作都是在主线程中执行，主线程中不允许执行比较耗时的操作&lt;br/&gt; 3&gt; 将比较耗时的操作放到其他线程中执行（NSThread、NSOperation、GCD）&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>利用NSOperation和NSOperationQueue时，有3个NSOperation分别为A\B\C，要求A\B执行完之后，才执行C，怎么做？</string>
+		<key>detail</key>
+		<string> &lt;p&gt;1&gt; 一个NSOpetaion对象 封装 一个操作&lt;br/&gt; 2&gt; 将NSOpetaion对象放到NSOperationQueue这个队列对象中，就会异步（后台线程，非主线程）执行 NSOpetaion对象 封装的操作&lt;br/&gt; 3&gt; 设置依赖关系     [c    addDependency: a];     [c   addDependency] ;&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>在非ARC中，可以对某些对象加上autorelease关键字，作用是啥？被autorelease修饰的对象什么时候被释放？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; 会将这个对象 添加 到 一个自动释放池中，不用再关心这个对象什么时候调用release&lt;br/&gt;2&gt; 对象所在的自动释放池被销毁的时候，对象会做一次release操作，如果这时对象的计数器为0了，就会被释放&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>详细说明app的启动过程，从main.m文件说起，其中有哪些函数，几个参数，作用是啥？</string>
+		<key>detail</key>
+		<string> &lt;p&gt;1&gt; 执行main函数&lt;br/&gt; 2&gt; main函数内部执行UIApplicationMain函数&lt;br/&gt; 3&gt; UIApplicationMain函数有4个参数&lt;br/&gt;   * 前2个参数：int argc, char * argv[] 是标准C语言main函数参数，交给系统处理即可(运行程序时所附带的参数)&lt;br/&gt;   * NSString *principalClassName : 传入UIApplication或者子类的名称,nil默认就是UIApplication&lt;br/&gt;   * NSString *delegateClassName : 代理的类名&lt;br/&gt; 4&gt; 根据principalClassName创建一个UIApplication对象&lt;br/&gt; 5&gt; 根据delegateClassName创建一个代理对象，设置为UIApplication的delegate&lt;br/&gt; 6&gt; 开启一个消息循环，监听所有的系统事件（程序启动完毕、程序进入前台、程序进入后台、程序接收内存警告）&lt;br/&gt; 7&gt; 监听到对应的事件，就会通知代理，调用代理相应的方法处理系统事件&lt;br/&gt; 8&gt; 程序启动完毕后，就会调用代理的application:didFinishLaunchingWithOptions:方法&lt;br/&gt;   * 创建窗口&lt;br/&gt;   * 设置窗口的根控制器&lt;br/&gt;   * 显示窗口（成为主窗口）&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>CAAnimation是做什么的？写一下它的层级结构</string>
+		<key>detail</key>
+		<string>&lt;p&gt; * CAAnimation封装一个动画，描述动画的执行过程（动画的时间、具体属性）&lt;br/&gt; * 将一个CAAnimation对象添加一个控件的layer（图层）上，这个layer就会开始执行这个动画&lt;br/&gt; * 继承结构比较复杂，主要的子类有如下几个：&lt;br/&gt;CABasicAnimation&lt;br/&gt; CAKeyframeAnimation&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>iOS7之前，后台执行操作有几种形式？都是什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt; 1&gt; music（音乐，多媒体）&lt;br/&gt; 2&gt; voip（实时网络连接，后台语音）&lt;br/&gt; 3&gt; location（定位）&lt;br/&gt; Info.plist中添加UIBackgroundModes键值&lt;br/&gt; http://bbs.weiphone.com/read-htm-tid-6565487.html&lt;br/&gt; http://club.tgfcer.com/thread-6721943-1-1.html&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>3</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Objective-C如何对内存管理的,说说你的看法和解决方法?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	每个对象都有一个引用计数器，每个新对象的计数器是1，当对象的计数器减为0时，就会被销毁&lt;br/&gt;•	通过retain可以让对象的计数器+1、release可以让对象的计数器-1&lt;br/&gt;•	还可以通过autorelease pool管理内存&lt;br/&gt;•	如果用ARC，编译器会自动生成管理内存的代码&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>内存管理的几条原则时什么？按照默认法则.哪些方法生成的对象需要手动释放？在和property结合的时候怎样有效的避免内存泄露？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	只要调用了alloc、copy、new方法产生了一个新对象，都必须在最后调用一次release或者autorelease&lt;br/&gt;•	只要调用了retain，都必须在最后调用一次release或者autorelease&lt;br/&gt;•	@property如果用了copy或者retian，就需要对不再使用的属性做一次release操作&lt;br/&gt;•	如果用了ARC，另外讨论&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>自动释放池是什么,如何工作的</string>
+		<key>detail</key>
+		<string>&lt;p&gt;是通过引用计数器的方式来管理内存的,每个对象开始分配内存的时候引用计数都为1,每当碰到copy,retain的时候引用计数器都会加1,每当配到release和autorelease的时候引用计数器就会减1. 自动释放池会在自动释放池结束时对里面所有的对象进行一次release操作.autorelease实际上只是把对release的调用延迟了.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>谈谈你对ARC 的认识和理解？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;ARC是iOS 5推出的新功能，全称叫 ARC(Automatic Reference Counting)。简单地说，就是代码中自动加入了retain/release，原先需要手动添加的用来处理内存管理的引用计数的代码可以自动地由编译器完成了。简单地理解ARC，就是通过指定的语法，让编译器(LLVM3.0)在编译代码时，自动生成实例的引用计数管理部分代码。有一点，ARC并不是GC，它只是一种代码静态分析（Static Analyzer）工具。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>7</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>基本的ARC使用规则</string>
+		<key>detail</key>
+		<string> &lt;p&gt;代码中不能使用retain, release, retain, autorelease&lt;br/&gt;不重载dealloc（如果是释放对象内存以外的处理，是可以重载该函数的，但是不能调用[super dealloc]）&lt;br/&gt;不能使用NSAllocateObject, NSDeallocateObject&lt;br/&gt;不能在C结构体中使用对象指针&lt;br/&gt;id与void *间的如果cast时需要用特定的方法（__bridge关键字）&lt;br/&gt;不能使用NSAutoReleasePool、而需要@autoreleasepool块&lt;br/&gt;不能使用“new”开始的属性名称 （如果使用会有下面的编译错误”Property’s synthesized getter follows Cocoa naming convention for returning ‘owned’ objects”）&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>堆和栈的内存区别,他们是如何分配和释放的</string>
+		<key>detail</key>
+		<string>&lt;p&gt;栈:是由编译器自动管理,无需我们手动控制,&lt;br/&gt;堆:释放工作是由程序员来控制,容易产生内存泄露.&lt;br/&gt;栈有2种分配方式:静态分配和动态分配,静态分配是由编译器完成的,比如局部变量的分配,动态分配由alloc函数进行分配.释放跟堆不同,栈的动态分配是由编译器进行释放的.&lt;br/&gt;堆:都是动态分配.没有静态分配.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>简单描述下客户端的缓存机制？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	缓存可以分为：内存数据缓存、数据库缓存、文件缓存&lt;br/&gt;•	每次想获取数据的时候&lt;br/&gt;•	先检测内存中有无缓存&lt;br/&gt;•	再检测本地有无缓存(数据库\文件)&lt;br/&gt;•	最终发送网络请求&lt;br/&gt;•	将服务器返回的网络数据进行缓存（内存、数据库、文件）， 以便下次读取&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Block底层实现/内存管理</string>
+		<key>detail</key>
+		<string>&lt;p&gt;block变量本质是一个指向结构体的指针&lt;br/&gt;block中所使用的变量会转变成结构体中的参数,传入结构体中&lt;br/&gt;结构体中再调用系统动态生成的方法执行.&lt;br/&gt;默认是值传递  只有加上 __block 声明变量就换转变成指针传递&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Block内存管理</string>
+		<key>detail</key>
+		<string>&lt;p&gt;默认情况下block是存在栈中的,如果block中使用其他,不会对其他对象进行强引用&lt;br/&gt;block用copy的原因就是为了将block保存在堆中,只要对象存储block就存储&lt;br/&gt;但如果在block中引用了其他对象就会造成循环引用.&lt;br/&gt;所以必须在需要引用的对象前加上&lt;br/&gt; __weak  typeof(self)  weakSelf = self;&lt;br/&gt;另外用下划线访问对象属性也会造成循环引用&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>readwrite，readonly，assign，retain，copy，nonatomic 属性的作用？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;@property是 一个属性访问声明，扩号内支持以下几个属性：&lt;br/&gt;1，getter=getterName，setter=setterName，设置setter与 getter的方法名&lt;br/&gt;2，readwrite,readonly，设置可供访问级别&lt;br/&gt;2，assign，setter方法直接赋值，不进行 任何retain操作，为了解决原类型与环循引用问题&lt;br/&gt;3，retain，setter方法对参数进行release旧值再retain新值，所有 实现都是这个顺序(CC上有相关资料)&lt;br/&gt;4，copy，setter方法进行Copy操作，与retain处理流程一样，先旧值release，再 Copy出新的对象，retainCount为1。这是为了减少对上下文的依赖而引入的机制。&lt;br/&gt;5，nonatomic，非原子性访问，不加同步， 多线程并发访问会提高性能。注意，如果不加此属性，则默认是两个访问方法都为原子型事务访问。锁被加到所属对象实例级(我是这么理解的…)。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是retaincount?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;retainCount返回当前内存的引用计数值。当内存被开辟后，默认的引用计数为1 。&lt;/p&gt;
+&lt;p&gt;对象的释放是通过引用计数器来管理的,当引用计数器为0时,对象才会销毁&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>为什么很多内置类如UITableViewController的delegate属性都是assign而不是retain的？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;会引起循环引用。&lt;br/&gt;这里delegate我们只是想得到实现了它delegate方法的对象，然后拿到这个对象的指针就可以了，我们不期望去改变它或者做别的什么操作，所以我们只要用assign拿到它的指针就可以了。&lt;br/&gt;而用retain的话，计数器加1。我们有可能在别的地方期望释放掉delegate这个对象，然后通过一些判断比如说它是否已经被释放，做一些操作。但 是实际上它retainCount还是1，没有被释放掉，要在UITableViewController的dealloc里面才被释放掉（这里我只是举 个例子，一般retain的对象都是在dealloc里被释放）。这里就会造成一些问题出现。&lt;br/&gt;而如果你确定不会有冲突的问题出现的话，或者你也希望用到delegate的这个对象，直到你不用它为止，那么用retain也未尝不可，只是需要最后release一次。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Objective C中的protocal是什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;@protocal obj里面的协议就如同java里面的interface。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Objective C中的selector 是什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;你可以理解 @selector()就是取类方法的编号,他的行为基本可以等同C语言的中函数指针,只不过C语言中，可以把函数名直接赋给一个函数指针，而 Objective-C的类不能直接应用函数指针，这样只能做一个@selector语法来取.它的结果是一个SEL类型。这个类型本质是类方法的编号 (函数地址)。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Objective C中的category是什么?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;Objective-C提供了一个非常灵活的类(Class)扩展机制－类别(Category)。类别用于对一个已经存在的类添加方法 (Methods)。你只需要知道这个类的公开接口，不需要知道类的源代码。需要注意的是，类别不能为已存在的类添加实例变量(Instance Variables)。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是Notification？什么时候用delegate，什么时候用Notification？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;观察者模式，controller向defaultNotificationCenter添加自己的notification，其他类注册这个 notification就可以收到通知，这些类可以在收到通知时做自己的操作（多观察者默认随机顺序发通知给观察者们，而且每个观察者都要等当前的某个观察者的操作做完才能轮到他来操作，可以用NotificationQueue的方式安排观察者的反应顺序，也可以在添加观察者中设定反映时间，取消观察需要在viewDidUnload跟dealloc中都要注销）。&lt;br/&gt;delegate针对one-to-one关系，并且reciever可以返回值给sender，notification可以针对one-to- one/many/none,reciever无法返回值给sender.所以，delegate用于sender希望接受到reciever的某个功能反馈值，
+notification用于通知多个object某个事件。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>指针与地址的区别? </string>
+		<key>detail</key>
+		<string>&lt;p&gt;区别: &lt;br/&gt;1指针意味着已经有一个指针变量存在,他的值是一个地址,指针变量本身也存放在一个长度为四个字节的地址当中,而地址概念本身并不代表有任何变量存在. &lt;br/&gt;2 指针的值,如果没有限制,通常是可以变化的,也可以指向另外一个地址. &lt;br/&gt;地址表示内存空间的一个位置点,他是用来赋给指针的,地址本身是没有大小概念,指针指向变量的大小,取决于地址后面存放的变量类型. &lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>指向指针的指针? </string>
+		<key>detail</key>
+		<string>&lt;p&gt;指针指向的变量是一个指针,即具体内容为一个指针的值,是一个地址. &lt;br/&gt;此时指针指向的变量长度也是4位. &lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>指针作为函数的参数? </string>
+		<key>detail</key>
+		<string>&lt;p&gt;比如指向一个复杂数据结构的指针作为函数变量 &lt;br/&gt;这种方法避免整个复杂数据类型内存的压栈出栈操作,提高效率. &lt;br/&gt;注意:指针本身不可变,但指针指向的数据结构可以改变. &lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Heap与stack的差别。栈和堆</string>
+		<key>detail</key>
+		<string>            &lt;p&gt;Heap是堆，stack是栈。&lt;br/&gt;Stack的空间由操作系统自动分配/释放，Heap上的空间手动分配/释放。&lt;br/&gt;Stack空间有限，Heap是很大的自由存储区&lt;br/&gt;             C中的malloc函数分配的内存空间即在堆上,C++中对应的是new操作符。&lt;br/&gt;程序在编译期对变量和函数分配内存都在栈上进行,且程序运行过程中函数调用时参数的传递也在栈上进行&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>SDWebimage内存警告处理</string>
+		<key>detail</key>
+		<string>&lt;p&gt;当应用程序接收到内存警告的时候就会调applicationDidReceiveMemoryWarning&lt;br/&gt;应该在该方法中释放掉不需要的内存,停止所有的子线程下载&lt;br/&gt;[[SDWebImageManager sharedManager] cancelAll];    &lt;br/&gt;// 清空SDWebImage保存的所有内存缓存&lt;br/&gt;[[SDWebImageManager sharedManager].imageCache clearMemory];&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>block的运用</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1、参数是NSString*的代码块&lt;br/&gt;void (^printBlock)(NSString *x);&lt;br/&gt;printBlock = ^(NSString* str)&lt;br/&gt; { &lt;br/&gt;NSLog(@&quot;print:%@&quot;, str);&lt;br/&gt;};&lt;br/&gt;printBlock(@&quot;hello world!&quot;);&lt;br/&gt;运行结果是：print:hello world!&lt;br/&gt;2、代码用在字符串数组排序&lt;br/&gt;NSArray *stringArray = [NSArray arrayWithObjects:@&quot;abc 1&quot;, @&quot;abc 21&quot;, @&quot;abc 12&quot;,@&quot;abc 13&quot;,@&quot;abc 05&quot;,nil];&lt;br/&gt;NSComparator sortBlock = ^(id string1, id string2)&lt;br/&gt;{&lt;br/&gt;    return [string1 compare:string2]; &lt;br/&gt;}; &lt;br/&gt;NSArray *sortArray = [stringArray sortedArrayUsingComparator:sortBlock]; &lt;br/&gt;NSLog(@&quot;sortArray:%@&quot;, sortArray);&lt;br/&gt;运行结果：sortArray:(&lt;br/&gt;   &quot;abc 05&quot;,&lt;br/&gt;   &quot;abc 1&quot;,&lt;br/&gt;   &quot;abc 12&quot;,&lt;br/&gt;   &quot;abc 13&quot;,&lt;br/&gt;    &quot;abc 21&quot;&lt;br/&gt;)&lt;br/&gt;3、代码块的递归调用&lt;br/&gt;static void (^ const blocks)(int) = ^(int i)  &lt;br/&gt;{&lt;br/&gt;if (i &gt; 0) {&lt;br/&gt;NSLog(@&quot;num:%d&quot;, i); &lt;br/&gt;blocks(i - 1);&lt;br/&gt;}&lt;br/&gt;};&lt;br/&gt; blocks(3);&lt;br/&gt; 运行打印结果：&lt;br/&gt; num:3&lt;br/&gt;num:2 &lt;br/&gt; num:1&lt;br/&gt;4、在代码块中使用局部变量和全局变量 &lt;br/&gt; int global = 1000; &lt;br/&gt; int main(int argc, const char * argv[]) &lt;br/&gt;{ &lt;br/&gt;@autoreleasepool {  &lt;br/&gt;void(^block)(void) = ^(void)  &lt;br/&gt;{ &lt;br/&gt;global++; &lt;br/&gt; NSLog(@&quot;global:%d&quot;, global);&lt;br/&gt;};  &lt;br/&gt;block(); &lt;br/&gt;NSLog(@&quot;global:%d&quot;, global); &lt;br/&gt; } &lt;br/&gt;return 0;  &lt;br/&gt;运行打印结果： &lt;br/&gt;global:1001 &lt;br/&gt;global:1001&lt;br/&gt;而局部变量可以使用，但是不能改变。&lt;br/&gt;int local = 500;&lt;br/&gt;void(^block)(void) = ^(void)&lt;br/&gt;{&lt;br/&gt;     local++;&lt;br/&gt;   NSLog(@&quot;local:%d&quot;, local);&lt;br/&gt;};&lt;br/&gt;block();&lt;br/&gt;NSLog(@&quot;local:%d&quot;, local);&lt;br/&gt;在代码块中改变局部变量编译不通过。怎么在代码块中改变局部变量呢？在局部变量前面加上关键字：__block&lt;br/&gt;__block int local = 500;&lt;br/&gt;void(^block)(void) = ^(void)&lt;br/&gt;{&lt;br/&gt;local++;&lt;br/&gt;NSLog(@&quot;local:%d&quot;, local);&lt;br/&gt;};&lt;br/&gt;block();&lt;br/&gt;NSLog(@&quot;local:%d&quot;, local);&lt;br/&gt;运行结果：local:501&lt;br/&gt;local:501&lt;br/&gt; &lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>循环引用</string>
+		<key>detail</key>
+		<string>&lt;p&gt;两个以上strong或者retain类型对象 相互引用时会造成循环引用,也就是内存泄露.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>1</string>
+		<key>zan</key>
+		<integer>1</integer>
+	</dict>
+</array>
+</plist>

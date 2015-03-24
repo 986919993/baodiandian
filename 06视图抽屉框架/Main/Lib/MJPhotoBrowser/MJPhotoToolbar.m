@@ -9,6 +9,7 @@
 #import "MJPhotoToolbar.h"
 #import "MJPhoto.h"
 //#import "MBProgressHUD+Add.h"
+#import "MBProgressHUD+NJ.h"
 
 @interface MJPhotoToolbar()
 {
@@ -24,7 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+
+//        - (void)setCurrentPhotoIndex:(NSUInteger)currentPhotoIndex
     }
     return self;
 }
@@ -47,12 +49,13 @@
     // 保存图片按钮
     CGFloat btnWidth = self.bounds.size.height;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _saveImageBtn.frame = CGRectMake(20, 0, btnWidth, btnWidth);
+    _saveImageBtn.frame = CGRectMake(self.frame.size.width - 50, 0, btnWidth, btnWidth);
     _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
     [_saveImageBtn addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_saveImageBtn];
+    _saveImageBtn.enabled = YES;
 }
 
 - (void)saveImage
@@ -70,21 +73,20 @@
     } else {
         MJPhoto *photo = _photos[_currentPhotoIndex];
         photo.save = YES;
-        _saveImageBtn.enabled = NO;
-//        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
+        _saveImageBtn.enabled = YES;
+        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
     }
 }
 
 - (void)setCurrentPhotoIndex:(NSUInteger)currentPhotoIndex
 {
     _currentPhotoIndex = currentPhotoIndex;
-    
     // 更新页码
     _indexLabel.text = [NSString stringWithFormat:@"%d / %d", _currentPhotoIndex + 1, _photos.count];
     
     MJPhoto *photo = _photos[_currentPhotoIndex];
     // 按钮
-    _saveImageBtn.enabled = photo.image != nil && !photo.save;
+    _saveImageBtn.enabled = photo.image != nil;
 }
 
 @end

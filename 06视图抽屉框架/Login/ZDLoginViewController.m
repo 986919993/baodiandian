@@ -42,15 +42,9 @@
     weibo.opertion = ^(){
         [self weiboLogin];
     };
-//    weibo.destVC = [ZDWeiBoViewController class];
-    ZDCommonArrowItem *QQ = [ZDCommonArrowItem itemWithTitle:@"腾讯QQ登陆" icon:@"logon_qq_icon"];
-    QQ.opertion = ^(){
-         [self QQLogin];
-    };
-//    QQ.destVC = [ZDQQLoginViewController class];
     ZDCommonGroup *group = [self addGroup];
-    group.items = @[weibo,QQ];
-    [self initTencent];
+    group.items = @[weibo];
+    
 }
 
 - (void)weiboLogin
@@ -68,6 +62,7 @@
     // 让webView加载URL请求
     [webView loadRequest:relRequest];
 }
+
 /**
  *  当webView开始加载时 调用第三方框架 提示用户正在加载中...
  */
@@ -143,52 +138,16 @@
         UIWindow *windows = app.keyWindow;
         windows.rootViewController = root;
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+        
     }];
 }
 
 - (void)dealloc{
-    NSLog(@"销毁登陆界面");
+    
 }
 
 
-
-
-
-
-
-- (void)QQLogin
-{
-    NSArray *permissions = [NSArray arrayWithObjects:@"get_user_info", @"add_t", nil];
-    [_tencentOAuth authorize:permissions inSafari:NO];
-}
-
-- (void)initTencent
-{
-    NSString *appid = @"222222";
-    _tencentOAuth = [[TencentOAuth alloc]initWithAppId:appid andDelegate:self];
-}
-
-- (void)tencentDidLogin
-{
-    /** 获取用户信息 */
-    if ([_tencentOAuth getUserInfo]) {
-        ZDLog(@"获取用户信息成功");
-    }else{
-        ZDLog(@"获取用户信息失败");
-    }
-}
-
-/** 获取用户信息 */
-- (void)getUserInfoResponse:(APIResponse *)response
-{
-    [self saveAccount:response.jsonResponse];
-    ZDRootViewController *root = [[ZDRootViewController alloc]init];
-    UIApplication *app = [UIApplication sharedApplication];
-    UIWindow *windows = app.keyWindow;
-    windows.rootViewController = root;
-}
-
+/** 保存用户信息 */
 - (void)saveAccount:(NSDictionary *)respones
 {
     NSDictionary *dict = respones;
@@ -200,7 +159,6 @@
     account.gender = dict[@"gender"];
     [ZDAccountTool saveAccount:account];
 }
-
 
 - (void)tencentDidNotLogin:(BOOL)cancelled
 {

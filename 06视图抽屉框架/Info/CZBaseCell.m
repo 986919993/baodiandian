@@ -10,6 +10,8 @@
 
 @implementation CZBaseCell
 
-
++ (CGFloat)rowHeight{
+    return 0.0;
+};
 
 @end

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>你使用过runtime运行时机制吗？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;利用动态绑定runtime运行时机制做归档操作&lt;br/&gt;
+    unsigned int count = 0;&lt;br/&gt;
+    // 1.获取指定类中所有的属性&lt;br/&gt;
+    Ivar * vars = class_copyIvarList([self class], &amp;count);&lt;br/&gt;
+    // 2.遍历取出每一个属性&lt;br/&gt;
+    for (int i = 0; i &lt; count; i++) {&lt;br/&gt;
+        Ivar var = vars[i];&lt;br/&gt;
+        // 根据属性取出属性的名称&lt;br/&gt;
+        const char * varName = ivar_getName(var);&lt;br/&gt;
+        // 将属性名称转换为OC字符串&lt;br/&gt;
+        NSString *name = [NSString stringWithUTF8String:varName];&lt;br/&gt;
+        // 根据属性名称利用KVC取出对应的值&lt;br/&gt;
+        id value = [self valueForKeyPath:name];&lt;br/&gt;
+        // 归档&lt;br/&gt;
+        [encoder encodeObject:value forKey:name];&lt;br/&gt;
+    }&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>说说IOS7有哪些新特性</string>
+		<key>detail</key>
+		<string>&lt;p&gt;      1.状态栏，导航栏和应用实际展示内容不再限界：系统自带的应用都不再区分状态栏和NavBar，而是用统一的颜色力求简洁。&lt;br/&gt;
+	2.BarItem的按钮全部文字化，所有的导航和工具条按钮都取消了拟物化。&lt;br/&gt;
+	3.为后台下载，开发者必须使用一个新的类NSURLSession，其实就是在NSURLConnection上加了后台处理。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>IOS8新特性</string>
+		<key>detail</key>
+		<string>&lt;p&gt;在 iOS 8 中，Apple 的工程师们可以说“极富想象力”地干脆把限制和表征屏幕尺寸的长宽数字给去掉了，取而代之使用 size classes 的概念，将长宽尺寸按照设备类型和方向归类为 regular 和 compact 两类。通过为不同的设备定义尺寸分类，用来定义同类型的操作特性，这使得开发者更容易利用一套 UI 来适配不同的屏幕。&lt;/p&gt;&lt;p&gt;
+iOS 8 在 UIKit 中添加了一整套使用 size classes 来进行布局的 API，并且将原有的比较复杂（或者说有些冗余）的 API 作废了。结合新的 Interface Builder 和 Auto&lt;/p&gt;&lt;p&gt;
+ Layout，可以说对于多尺寸屏幕的适配得到了前所未有的简化。&lt;/p&gt;&lt;p&gt;
+Health Kit 和 Home Kit 可穿戴设备和智能家居，第三方应用可以向用户申请授权使用其中的数据或是向其中汇报数据。而Home Kit则以家庭，房间设备的组织形式来管理和控制家中适配了Home Kit的智能家电。&lt;/p&gt;&lt;p&gt;
+CoreLocation 室内定位。现在 CL 可以给出在建筑物中的楼层定位信息了&lt;/p&gt;&lt;p&gt;
+Touch ID API，说是开放Touch ID的验证，但是实际上能做的事情还是比较有限。因为现在提供的API只能验证用户是不是手机主人本人，而不能给出一个识别的标志或者唯一编码，所以想用Touch ID做注册登陆什么的话可能还是不太容易实现。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>开发调试技巧</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.最简单的一个方法，通过一个宏让NSLog只在debug build的时候起作用。将这个宏定义到.pch头文件中全局都使用此宏进行打印输出。&lt;br/&gt;
+2.静态分析器和Inspector（检查器）&lt;br/&gt;
+3.使用对象的生命周期来跟踪内存的使用。&lt;br/&gt;
+4.条件断点（打断点时，右键点击断电，然后选择“edit  breakpoint”来设置特定条件，只有满足这个条件程序才会暂停）&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>网络中的进程之间如何通信？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;要想了解Soket首先要知道网络中进程之间如何通信，首要解决的问题是如何唯一标示一个进程。&lt;br/&gt;
+网络层的“IP地址”可以唯一标示网络中的主机，而传输层的“协议+端口”可以唯一标示主机中的应用程序（进程），组合到一起就可以标示网络中的进程，网络中的进程通信就可以利用这个标示与其他进程进行交互。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是Socket？ 简述一下Socket。</string>
+		<key>detail</key>
+		<string>&lt;p&gt;socket起源与Unix，而Unix/Linux基本哲学之一就是一切皆文件。都可以用“打开—读写—关闭”的模式来操作。 我的理解Socket就是该模式的一个实现。&lt;br/&gt;
+Socket即是一种特殊的文件，一些Socket函数就是对其进行的操作（读/写、打开、关闭）&lt;br/&gt;
+1.先创建一个长连接.&lt;br/&gt;
+2.建立与主机的连接.   &lt;br/&gt;
+3.然后监听数据的写入和输出，&lt;br/&gt;
+（输出流：客户端发送数据告诉服务器聊天信息）&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>解释一下多线程</string>
+		<key>detail</key>
+		<string>&lt;p&gt;多线程。即便处理器只能运行一个线程，操作系统也可以通过快速的在不同线程之间进行切换，由于时间间隔很小，来给用户造成一种多个线程同时运行的假象。这样的程序运行机制被称为软件多线程&lt;br/&gt;
+如果在主线程处理过于复杂的操作或者网络请求,将会给用户造成卡顿的现象,因此,需要开辟一条子线程去处理耗时的操作。&lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Socket中TCP的三次握手建立连接详解</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.客户端向服务器发送一个SYN J&lt;br/&gt;
+2.服务器向客户端响应一个SYN K ,并对SYN J进行确认ACKJ+1&lt;br/&gt;
+3.客户端再向服务器发送一个确认ACK K+1；服务器收到ACK K+1时，accept返回，至此三次握手完毕，连接建立。&lt;br/&gt;
+其实就是保证客户端与服务器端的连接是安全有效的。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>简述一下单例设计模式（singletion）</string>
+		<key>detail</key>
+		<string>&lt;p&gt;如UIApplication，NSUserDefaults，UIDevice等都采用了单例设计模式。&lt;br/&gt;
+1.可以保证某个类实例化出来的对象永远只有1个。&lt;br/&gt;
+2.节省内存开销。&lt;br/&gt;
+3.保证一个类的实例中永久持有某一些数据，并且整个程序都可能使用这些数据，需要把这个类设置成单例模式。&lt;br/&gt;
+4.工具类可以使用单例设计模式，全局是需要实例化一次。&lt;br/&gt;
+5.大部分工具类都可用单例设计模式，效率更高。&lt;br/&gt;
+6.另外重写了copyWithZone：  mutableCopyWithZone： 防止其他可能性造成对象的重新生成。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>对于类方法（静态方法）默认是autorelease的，所有类方法都会是这样吗？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.系统自带的绝大多数类方法返回的对象，都是经过autorelease的。&lt;br/&gt;
+2.比如alloc类方法就没有加autorelease。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>怎么保证多人开发进行内存泄露的检查.</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.  使用Analyze进行代码的静态分析&lt;br/&gt;
+2. 为避免不必要的麻烦, 多人开发时尽量使用ARC&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>非自动内存管理情况下怎么做单例模式.</string>
+		<key>detail</key>
+		<string>&lt;p&gt;创建单例设计模式的基本步骤 ·&lt;br/&gt;
+&gt;声明一个单件对象的静态实例,并初始化为nil。&lt;br/&gt;
+&gt;创建一个类的类工厂方法,当且仅当这个类的实例为nil时生成一个该类的实例&lt;br/&gt;
+&gt;实现NScopying协议, 覆盖allocWithZone:方法,确保用户在直接分配和初始化对象时,不会产 生另一个对象。&lt;br/&gt;
+&gt;覆盖release、autorelease、retain、retainCount方法, 以此确保单例的状态。&lt;br/&gt;
+&gt;在多线程的环境中,注意使用@synchronized关键字或GCD,确保静态实例被正确的创建和初始化。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>对于类方法（静态方法）默认是autorelease的。所有类方法都会这样吗？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.  系统自带的绝大数类方法返回的对象,都是经过autorelease的，但有的没有比如alloc。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>block在ARC中和MRC中的用法有什么区别,需要注意什么</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.对于没有引用外部变量的Block，无论在ARC还是非ARC下，类型都是__NSGlobalBlock__，这种类型的block可以理解成一种全局的block，不需要考虑作用域问题。同时，对他进行Copy或者Retain操作也是无效的&lt;br/&gt;
+ 	2.应注意避免循环引用&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么情况下会发生内存泄漏和内存溢出？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;当程序在申请内存后，无法释放已申请的内存空间(例如一个对象或者变量使用完成后没有释放,这个对象一直占用着内存)，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存,迟早会被占光。内存泄露会最终会导致内存溢出！&lt;br/&gt;
+当程序在申请内存时，没有足够的内存空间供其使用，出现out of memory；比如申请了一个int,但给它存了long才能存下的数，那就是内存溢出。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>[NSArray arrayWithobject:&lt;id&gt;] 这个方法添加对象后，需要对这个数组做释放操作吗？</string>
+		<key>detail</key>
+		<string>​&lt;p&gt;不需要 这个对象被放到自动释放池中&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>runtime实现的机制是什么,怎么用，一般用于干嘛. 你还能记得你所使用的相关的头文件或者某些方法的名称吗？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;导入#import &lt;objc/runtime.h&gt;&lt;br/&gt;
+导入#import &lt;objc/message.h&gt;&lt;br/&gt;
+运行时机制，runtime库里面包含了跟类、成员变量、方法相关的API，比如获取类里面的所有成员变量，为类动态添加成员变量，动态改变类的方法实现，为类动态添加新的方法等&lt;br/&gt;&lt;br/&gt;
+1.runtime，运行时机制，它是一套C语言库&lt;br/&gt;
+2.实际上我们编写的所有OC代码，最终都是转成了runtime库的东西，比如类转成了runtime库里面的结构体等数据类型，方法转成了runtime库里面的C语言函数，平时调方法都是转成了objc_msgSend函数（所以说OC有个消息发送机制）&lt;br/&gt;
+3.因此，可以说runtime是OC的底层实现，是OC的幕后执行者&lt;br/&gt;
+4.有了runtime库，能做什么事情呢？runtime库里面包含了跟类、成员变量、方法相关的API，比如获取类里面的所有成员变量，为类动态添加成员变量，动态改变类的方法实现，为类动态添加新的方法等&lt;br/&gt;
+5.因此，有了runtime，想怎么改就怎么改&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么情况下会发生内存泄露和内存溢出？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;比如说植物大战僵尸，子弹打到僵尸身上，子弹执行完动画之后英爱销毁，但是你忘掉了，这就叫内存泄露。&lt;br/&gt;
+内存溢出： 内存空间不够用，内存空间爆了/撑不下了。比如 int类型你给他赋值了一个long类型才能装进入的值，就会造成内存溢出。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>JSON解析方案,有无内存泄露问题？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;IOS4时会用第三方框架SBJson,框架内部有没有内存泄露不知道。   IOS5开始之后统一建议使用苹果官方自带的NSJSONSerialization。官方自带的方法没有内存泄露。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>极光推送原理（第三方框架），怎么用的？遇到什么问题？怎么解决的？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.上传必要的证书（开发状态证书和生产状态证书）&lt;br/&gt;
+2.导入必要的依赖框架&lt;br/&gt;
+3.修改一些配置文件&lt;br/&gt;
+4.查看API文档添加相应代码&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>ios应用的登录状态如何像web项目的session那样保持？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;用一个单例来保存登陆的状态和信息。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>通知&amp;KVO&amp;代理</string>
+		<key>detail</key>
+		<string>&lt;p&gt;通知比较灵活（1个通知能被多个对象接受，一个对象能接受多个通知，并且两者之间可以没有任何联系）&lt;br/&gt;
+代理比较规范，代码很多（默认是1对1，并且不能跨级传递）&lt;br/&gt;
+KVO性能不多（底层会动态产生新的类），只能监听某个对象属性的改变，不推荐使用&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>新浪微博Oauth2.0认证</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.获取固定格式的URL请求地址，传入参数申请的AppKey和回调地址&lt;br/&gt;
+2.然后根据已经授权的标记code，和固定格式的参数，换取access_token。&lt;br/&gt;
+3.然后就可以调用API接口，获取用户信息。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>QQ第三方登陆</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.QQ互联申请AppKey，&lt;br/&gt;
+2.将QQ SDK文件添加到工程中&lt;br/&gt;
+3.添加依赖框架&lt;br/&gt;
+4.修改一些必要的工程配置文件 （解决框架中的命名冲突） -fobjc-arc&lt;br/&gt;
+5.选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type”添加一条新的URL scheme “tencent1101995550”（tencent+appid）。&lt;br/&gt;
+6.添加相应代码，调用登陆方法 需要传入NSArray（授权列表）&lt;br/&gt;
+7.登陆完成获取用户信息,返回字典格式数据&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>解释一下Block</string>
+		<key>detail</key>
+		<string>&lt;p&gt;block变量本质就是一个指向结构体的指针。&lt;br/&gt;
+程序运行时block中所使用的变量会转变成结构体中的参数再执行。&lt;br/&gt;
+编译器会将block的内部代码生成对应的函数。&lt;br/&gt;
+默认是值传递  只有加上 __block 声明变量就换转变成指针传递&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>11</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Block内存管理，使用Block需要注意什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;默认情况下block是存在栈中的,如果block中使用其他,不会对其他对象进行强引用&lt;br/&gt;
+block用copy的原因就是为了将block保存在堆中,只要对象存储block就存储&lt;br/&gt;
+但如果在block中引用了其他对象就会造成循环引用.&lt;br/&gt;
+所以必须在需要引用的对象前加上&lt;br/&gt;
+ __weak  typeof(self)  weakSelf = self;&lt;br/&gt;
+另外用下划线访问对象属性也会造成循环引用&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>开发流程是什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;市场分析，产品策划，开发设计，界面设计，代码开发，测试，部署，维护。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>ios中开发需要注意什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;注意命名冲突，注意需求沟通。注意内存泄露，注意BUG ，注意性能优化，注意公司情况太烂的公司就撤吧...&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>FBdb，有什么亮点</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.使数据库代码清晰明了，程序员只需要操作简单的SQL语句和操作即可和数据库进行交互。&lt;br/&gt;
+2.FMDB同时兼容ARC和非ARC工程，会自动根据工程配置来调整相关的内存管理代码。&lt;br/&gt;
+3.如果app中需要多线程操作数据库，那么就需要使用FMDatabaseQueue来保证线程安全了，切记不能在多个线程中共同一个FMDatabase对象并且在多个线程中同时使用，这个类本身不是线程安全的，这样使用会造成数据混乱等问题。&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>app发布流程</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.登陆开发者中心，申请Appid&lt;br/&gt;
+2.创建一个证书请求文件&lt;br/&gt;
+3.请求一个发布证书安装并导出（在线ipa包编译时需要上传这个.p12文件）&lt;br/&gt;
+4.生成provisioning规定文件&lt;br/&gt;
+5.Appcan.cn在线ipa包编译&lt;br/&gt;
+6.到Manage your App中 Add  New App。&lt;br/&gt;
+7.然后填写一些基本信息（提供一张1024*1024，多张截图）&lt;br/&gt;
+8.上传打包好的应用。&lt;br/&gt;&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>微信的附近功能怎么实现的？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;每个客户端都把自己的经纬度传到后台服务器，服务器进行匹配，然后下发到手机客户端，提醒用户附近有熊出没！&lt;br/&gt;&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>非ARC的内存管理原则</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.如果调用了alloc\new\copy产生了一个新对象，最后肯定要调用一次release或者autorelease&lt;br/&gt;
+2.如果让一个对象做了retain操作（计数器+1），最后肯定要调用一次release或者autorelease&lt;br/&gt;
+3.原则：有+ 就 有 - &lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string> 什么时候用GCD什么时候用NSOperationQueue?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;任务之间不太相互依赖：GCD&lt;br/&gt;
+任务之间有依赖/或者要监听任务的执行情况：NSOperationQueue&lt;br/&gt;
+GCD是纯C语言API， NSOperationQueue是基于GCD的OC版本封装。&lt;br/&gt;
+CGD的执行速度比NSOperationQueue快 &lt;br/&gt;&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>解释一下网络协议（Http，UDP，TCP\IP）Socket</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.Http：超文本传输协议，用于定义网络数据传输的格式（只能是客户端向服务器端发送，短链接，1对1响应没有第三者）&lt;br/&gt;
+2.UDP：传输协议，客户端A将数据发送给服务器，服务器将数据主动推送给客户端B。（局域网游戏，网络游戏，长连接）&lt;br/&gt;
+3.TCP\IP ： 传输协议，经过多次握手保证通信安全（聊天，长连接）&lt;br/&gt;
+Socket：套接字，是一个用于传输网络数据的工具，具体你要传输什么样的数据什么样的格式取决于你的协议。以上3种都可以作为Socket的传输协议。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>将一个12进制转换成2进制</string>
+		<key>detail</key>
+		<string>&lt;p&gt;先将12进制转换为10进制 AB（12） = 10×12 + 11 = 131（10）&lt;br/&gt;
+ 再将10进制转换为2进制，用2做除数。 &lt;br/&gt;
+131/ 2 = 65 余数：1 &lt;br/&gt;
+65 / 2 = 32 余数：1&lt;br/&gt;
+ 32 / 2 = 16 余数：0 &lt;br/&gt;
+16 / 2 = 8 余数：0&lt;br/&gt;
+ 8 / 2 = 4 余数：0 &lt;br/&gt;
+4 / 2 = 2 余数：0 &lt;br/&gt;
+2 / 2 = 1 余数：0&lt;br/&gt;
+ 1 / 2 = 0 余数：1 &lt;br/&gt;
+   最终结果为：10000011&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>11</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>为什么要用第三方框架？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	问这问题经过我的各种表情分析他当时的意思是可以不用，太多的第三方框架会给app本身添加重量，而且框架内部可能是不可控的。 除开一些必要的广泛认可的框架SDWebimage和AFN等优秀第三方框架，还有一些大公司提供的SDK尽量不要使用第三方框架&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>5</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>IOS允许长时间在后台运行的情况有7种：</string>
+		<key>detail</key>
+		<string>&lt;p&gt;audio&lt;/p&gt;&lt;p&gt;
+VoIP&lt;/p&gt;&lt;p&gt;
+GPS&lt;/p&gt;&lt;p&gt;
+下载新闻&lt;/p&gt;&lt;p&gt;
+和其它附属硬件进行通讯时&lt;/p&gt;&lt;p&gt;
+使用蓝牙进行通讯时&lt;/p&gt;&lt;p&gt;
+使用蓝牙共享数据时&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>6</string>
+		<key>zan</key>
+		<integer>10</integer>
+	</dict>
+</array>
+</plist>

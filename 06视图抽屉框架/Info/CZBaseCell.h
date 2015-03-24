@@ -19,5 +19,5 @@
 @property (nonatomic, strong) NSDictionary *dict;
 
 + (CGFloat)rowHeight;
-
+ 
 @end

@@ -10,8 +10,8 @@
 
 @interface ZDItemCell : UITableViewCell
 
-
+@property (nonatomic,assign) NSInteger num;
 @property (nonatomic,strong) NSDictionary *dict;
-
+//@property (nonatomic,assign) NSInteger dataID;
 + (CGFloat)cellHeight;
 @end

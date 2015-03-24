@@ -6,6 +6,7 @@
 
 #import "NSString+hash.h"
 
+
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 
@@ -71,7 +72,7 @@
 	NSData *messageData = [self dataUsingEncoding:NSUTF8StringEncoding];
 	NSMutableData *mutableData = [NSMutableData dataWithLength:CC_SHA512_DIGEST_LENGTH];
 	CCHmac(kCCHmacAlgSHA512, keyData.bytes, keyData.length, messageData.bytes, messageData.length, mutableData.mutableBytes);
-	return [self stringFromBytes:(unsigned char *)mutableData.bytes length:mutableData.length];
+	return [self stringFromBytes:(unsigned char *)mutableData.bytes length:mutableData.length ];
 }
 
 #pragma mark - Helpers
@@ -83,5 +84,7 @@
 		[mutableString appendFormat:@"%02x", bytes[i]];
 	return [NSString stringWithString:mutableString];
 }
+
+
 
 @end

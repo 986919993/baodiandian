@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Xib和storyboard对比</string>
+		<key>detail</key>
+		<string>&lt;p&gt;共同点：都用来描述UI界面，&lt;br/&gt;不同点：Xib是轻量级的，用来描述局部的UI界面，storyboard是重量级的用来描述整个软件的多个界面，并且能展示多个界面之间的跳转关系&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>view的封装</string>
+		<key>detail</key>
+		<string>&lt;p&gt;如果一个view内部的子控件比较多时，一般会考虑自定义一个view，把它内部的子控件屏蔽起来，不让外界关心&lt;br/&gt;外界可以传入对应的模型数据给view，view拿到模型数据后给你内部的子控件设置对应的数据&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>控制器View的生命周期及相关函数是什么？你在开发中是如何用的？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1.首先判断控制器是否有视图，如果没有就调用loadView方法创建：通过storyboard或者代码；&lt;br/&gt;* 2.随后调用viewDidLoad，可以进行下一步的初始化操作；只会被调用一次；&lt;br/&gt;* viewWillAppear； -&gt; viewDidAppear -&gt; viewWillDisappear -&gt; viewDidDisappear&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>SDWebImage的作用</string>
+		<key>detail</key>
+		<string>&lt;p&gt;自动本地缓存机制.异步下载提高用户体验,并且能避免图片混乱&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>封装工具类的好处</string>
+		<key>detail</key>
+		<string>&lt;p&gt;(1).使业务逻辑更加分明:把这段业务逻辑放到最应该执行的地方.&lt;br/&gt;(2).屏蔽业务逻辑细节,不让外界关心处理细节.&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>正确的关闭控制器方法</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	通过代理通知&quot;创建&quot;当前控制器的类,遵守谁创建,谁销毁原则,防止有可能发生的错误.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>id生命的对象有什么特性??</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	id类型是个可以指向任何类型的指针或者可以理解为指向任何未知类型的指针.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>UIView和CALayer有什么区别</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	UIView本身不具备显示功能,通过内部的CALayer层才有显示功能.&lt;br/&gt;两者最大的区别是,图层不会直接渲染到屏幕上.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>程序启动过程appDelegate方法</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	Main函数开始,调用代理的UIApplicationMain函数,在这里创建应用程序,实例化代理,并将应用程序添加到运行循环中.&lt;br/&gt;application:didFinishLaunchingWithOptions:程序一启动完成,就会通知代理调用此方法&lt;br/&gt;applicationWillResignActive:应用程序注销激活状态--暂停应用程序&lt;br/&gt;applicationDidEnterBackground:应用程序进入后台&lt;br/&gt;applicationWillEnterForeground:应用程序将要进入前台&lt;br/&gt;applicationDidBeconmeActive:应用程序被激活&lt;br/&gt;applicationWillTerminate:应用程序将被终止&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>UIView不接受触摸事件的五种情况</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	userInteractionEnabled = NO;&lt;br/&gt;hidden = YES;&lt;br/&gt;alpha  = 0.01以下;&lt;br/&gt;父视图不接受交互,那么子视图中的所有控件都不接受交互.&lt;br/&gt;UIImageView默认userInteractionEnabled = NO所以它以及它的子控件默认都是不能接收触摸事件的.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>响应者链是什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;UIResponder类，是UIKIT中一个用于处理事件响应的基类。窗口上的所有事件触发，都由该类响应（即事件处理入口）。所以，窗口上的 View及控制器都是派生于该类的，例如UIView、UIViewController等。调用UIResponder类提供的方法或属性，我们就可以 捕捉到窗口上的所有响应事件，并进行处理。&lt;br/&gt;
+事件响应的流程&lt;br/&gt;1、一个UIView发出一个事件之后，首先上传给其父视图;&lt;br/&gt;2、父视图上传给其所在的控制器;&lt;br/&gt;3、如果其控制器对事件进行处理，事件传递将终止，否则继续上传父视图;&lt;br/&gt;4、直到遇到响应者才会停止，否则事件将一直上传，直到UIWindow。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>12</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>UIscrollVew用到了什么设计模式？还能再foundation库中找到类似的吗？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;模板(Template)模式，所有datasource和delegate接口都是模板模式的典型应用，&lt;br/&gt;组合模式composition，所有的containerview都用了这个模式&lt;br/&gt;观察者模式observer，所有的UIResponder都用了这个模式。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是Notification？什么时候用delegate，什么时候用Notification？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;观察者模式，controller向defaultNotificationCenter添加自己的notification，其他类注册这个 notification就可以收到通知，这些类可以在收到通知时做自己的操作（多观察者默认随机顺序发通知给观察者们，而且每个观察者都要等当前的某个观察者的操作做完才能轮到他来操作，可以用NotificationQueue的方式安排观察者的反应顺序，也可以在添加观察者中设定反映时间，取消观察需要在viewDidUnload跟dealloc中都要注销）。&lt;br/&gt;delegate针对one-to-one关系，并且reciever可以返回值给sender，notification可以针对one-to- one/many/none,reciever无法返回值给sender.所以，delegate用于sender希望接受到reciever的某个功能反馈值，&lt;br/&gt;
+notification用于通知多个object某个事件。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>什么是KVC和KVO？Notification、delegate和KVO有什么不同？KVO在ObjC中是怎么实现的？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;KVC，即是指  HYPERLINK &quot;https://developer.apple.com/library/mac/&quot; \l &quot;documentation/Cocoa/Reference/Foundation/Protocols/NSKeyValueCoding_Protocol/Reference/Reference.html#//apple_ref/occ/cat/NSKeyValueCoding&quot; NSKeyValueCoding，一个非正式的 Protocol，提供一种机制来间接访问对象的属性。KVO 就是基于 KVC 实现的关键技术之一。Key-Value Observing (KVO) 建立在 KVC 之上，它能够观察一个对象的 KVC key path 值的变化。&lt;br/&gt;1.效率肯定是delegate比nsnotification高。&lt;br/&gt;2. delegate方法比notification更加直接，最典型的特征是，delegate方法往往需要关注返回值， 也就是delegate方法的结果。&lt;br/&gt;和delegate一样，KVO和NSNotification的作用也是类与类之间的通信，与delegate不同的是1）这两个都是负责发出通知，剩下的事情就不管了，所以没有返回值；2）delegate只是一对一，而这两个可以一对多。这两者也有各自的特点。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>程序启动过程</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	(1).从沙盒中取出账号信息,判断有无账号,没有去登陆界面授权&lt;br/&gt;(2).取出沙盒中存储的上次使用软件的版本号,和当前版本号做比较,如果相等则直接进入主界面完成登陆.  mainBudle中.infoDictionary[key]字典中存储字符串版本号&lt;br/&gt;(3).如果不相等则进入新特性界面.然后进入主界面&lt;br/&gt;(4).封装一个账号工具类,提供一个存储和一个获取账号的方法.&lt;br/&gt;(5).封装一个判断跳转工具类, 封转(2)(3)判断跳转到哪个控制器.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>简述UIView动画原理。</string>
+		<key>detail</key>
+		<string>&lt;p&gt;UIView对象中支持动画的几个属性:   frame,  bounds,  center,  transform,  alpha。&lt;br/&gt;ios通过视图来展示屏幕上的内容，但是UIView类的许多基础行为却严重依赖于另外一个对象。 UIKit每个视图对象的背后都有一个CoreAnimation层对象，它是一个CALayer类的实例，该类为视图内容的渲染，布局，合成以及动画提供基础性的支持。&lt;br/&gt;和MacOS不同的是，ios将CoreAnimation集成到视图渲染实现的核心。 由于SDK中UIKit提供了透明的接口，开发者大部分情况下，不必去关心和直接访问CoreAnimation。 但是如果要实现特别复杂的渲染和动画，就需要使用到CoreAnimation的接口支持了。&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>UIButton和UITableView的层级结构</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt;继承结构&lt;br/&gt;UIButton  :  UIController :  UIView  : UIResponder  :  NSObject&lt;br/&gt;&lt;br/&gt;UITableView  :  UITableView  UIScrollView  :UIView  : UIResponder  :  NSObject&lt;/p&gt;&lt;p&gt;2&gt; 内部的子控件结构&lt;br/&gt;UIButton   :  UILabel   +  UIImageView&lt;br/&gt;UITableView  : Cell  +  分割线&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>0</string>
+		<key>zan</key>
+		<integer>8</integer>
+	</dict>
+</array>
+</plist>

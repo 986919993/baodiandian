@@ -8,12 +8,14 @@
 
 #import "ZDItemCell.h"
 #import "ZDZanButton.h"
+#import "ZDDataTool.h"
 
 @interface ZDItemCell()
 
 @property (weak, nonatomic) IBOutlet ZDZanButton *zan;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 
+@property (nonatomic,strong) NSNumber *cellID;
 
 @end
 @implementation ZDItemCell
@@ -23,16 +25,24 @@
 
 }
 - (IBAction)zan:(id)sender {
-    NSLog(@"赞按钮");
+    NSString *str = [NSString stringWithFormat:@"%@",self.dict[@"zan"]];
+    NSInteger inter = [str intValue];
+    [ZDDataTool updata:self.cellID zan:inter];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"clickZan" object:self.cellID];
 }
 
 - (void)setDict:(NSDictionary *)dict{
     _dict = dict;
     self.zan.zan = dict[@"zan"];
-    self.title = dict[@"title"];
+    self.title.text = dict[@"title"];
+    self.cellID = dict[@"dataID"];
 }
+
 + (CGFloat)cellHeight{
-    return 60;
+    return 55;
+}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

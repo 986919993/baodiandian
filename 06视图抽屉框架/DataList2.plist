@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>多线程的底层实现？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; 首先搞清楚什么是线程、什么是多线程&lt;br/&gt;2&gt; Mach是第一个以多线程方式处理任务的系统，因此多线程的底层实现机制是基于Mach的线程&lt;br/&gt;3&gt; 开发中很少用Mach级的线程，因为Mach级的线程没有提供多线程的基本特征，线程之间是独立的&lt;br/&gt;4&gt; 开发中实现多线程的方案&lt;br/&gt;•	C语言的POSIX接口：#include &lt;pthread.h&gt;&lt;br/&gt;•	OC的NSThread&lt;br/&gt;•	C语言的GCD接口（性能最好，代码更精简）&lt;br/&gt;•	OC的NSOperation和NSOperationQueue（基于GCD）&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>线程间怎么通信？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; performSelector:onThread:withObject:waitUntilDone:&lt;br/&gt;2&gt; NSMachPort&lt;br/&gt;(基本机制：A线程（父线程）创建NSMachPort对象，并加入A线程的run loop。当创建B线程（辅助线程）时，将创建的NSMachPort对象传递到主体入口点，B线程（辅助线程）就可以使用相同的端口对象将消息传回A线程（父线程）。http://mobile.51cto.com/hot-403083_all.htm)&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>网络图片处理问题中怎么解决一个相同的网络地址重复请求的问题？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	利用NSOperationQueue和NSOperation下载图片, 还使用了GCD的一些函数(解码GIF图片)&lt;br/&gt;•	利用URL作为key，NSOperation作为value&lt;br/&gt;•	利用URL作为key，UIImage作为value&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>用NSOpertion和NSOpertionQueue处理A,B,C三个线程,要求执行完A,B后才能执行C,怎么做？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;// 创建队列&lt;br/&gt;NSOperationQueue *queue = [[NSOperationQueue alloc] init];&lt;br/&gt;&lt;br/&gt;// 创建3个操作&lt;br/&gt;NSOperation *a = [NSBlockOperation blockOperationWithBlock:^{&lt;br/&gt;NSLog(@”operation1---“);&lt;br/&gt;}];&lt;br/&gt;NSOperation *b = [NSBlockOperation blockOperationWithBlock:^{&lt;br/&gt;NSLog(@”operation1---“);&lt;br/&gt;}];&lt;br/&gt;NSOperation *c = [NSBlockOperation blockOperationWithBlock:^{&lt;br/&gt;NSLog(@”operation1---“);&lt;br/&gt;}];&lt;br/&gt;&lt;br/&gt;// 添加依赖&lt;br/&gt;[c addDependency:a];&lt;br/&gt;[c addDependency:b];&lt;br/&gt;&lt;br/&gt;// 执行操作&lt;br/&gt;[queue addOperation:a];&lt;br/&gt;[queue addOperation:b];&lt;br/&gt;[queue addOperation:c];&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>列举cocoa中常见对几种多线程的实现，并谈谈多线程安全的几种解决办法及多线程安全怎么控制？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; 只在主线程刷新访问UI&lt;br/&gt;2&gt; 如果要防止资源抢夺，得用synchronized进行加锁保护&lt;br/&gt;3&gt; 如果异步操作要保证线程安全等问题, 尽量使用GCD(有些函数默认就是安全的)&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>GCD内部怎么实现的</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; iOS和OS X的核心是XNU内核，GCD是基于XNU内核实现的&lt;br/&gt;2&gt; GCD的API全部在libdispatch库中&lt;br/&gt;3&gt; GCD的底层实现主要有Dispatch Queue和Dispatch Source&lt;br/&gt;•	Dispatch Queue ：管理block(操作)&lt;br/&gt;•	Dispatch Source ：处理事件(MACH端口发送,MACH端口接收,检测与进程相关事件等10种事件)&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; GCD是纯C语言的API，NSOperationQueue是基于GCD的OC版本封装&lt;br/&gt;2&gt; GCD只支持FIFO的队列，NSOperationQueue可以很方便地调整执行顺序、设置最大并发数量&lt;br/&gt;3&gt; NSOperationQueue可以在轻松在Operation间设置依赖关系，而GCD需要写很多的代码才能实现&lt;br/&gt;4&gt; NSOperationQueue支持KVO，可以监测operation是否正在执行（isExecuted）、是否结束（isFinished），是否取消（isCanceld）&lt;br/&gt;5&gt; GCD的执行速度比NSOperationQueue快&lt;/p&gt;&lt;p&gt;任务之间有依赖\或者要监听任务的执行情况：NSOperationQueue&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;Block的使用注意：&lt;br/&gt;•	block的内存管理&lt;br/&gt;•	防止循环retian&lt;br/&gt;•	非ARC（MRC）：__block&lt;br/&gt;•	ARC：__weak\__unsafe_unretained&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>在异步线程中下载很多图片,如果失败了,该如何处理?请结合RunLoop来谈谈解决方案.(提示:在异步线程中启动一个RunLoop重新发送网络请求,下载图片)</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1&gt; 重新下载图片&lt;br/&gt;2&gt; 下载完毕, 利用RunLoop的输入源回到主线程刷新UIImageVIUew&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>OC中创建线程的方法是什么？如果指定在主线程中执行代码？如何延时执行代码？</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	创建线程的方法&lt;br/&gt;•	NSThread&lt;br/&gt;•	NSOperationQueue和NSOperation&lt;br/&gt;•	GCD&lt;br/&gt;•	主线程中执行代码&lt;br/&gt;•	[self performSelectorOnMainThread: withObject: waitUntilDone:];&lt;br/&gt;•	[self performSelector: onThread:[NSThread mainThread] withObject: waitUntilDone:];&lt;br/&gt;•	dispatch_async(dispatch_get_main_queue(), ^{&lt;br/&gt;});&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>线程和进程的区别</string>
+		<key>detail</key>
+		<string>&lt;p&gt;进程：&lt;br/&gt;正在进行中的程序被称为进程，负责程序运行时的内存分配。&lt;br/&gt;每一个进程都有自己的独立的虚拟内存控件。&lt;br/&gt;线程：&lt;br/&gt;线程是进程中一个独立的执行路径（控制单元）&lt;br/&gt;一个进程中至少包含一条线程，即主线程&lt;br/&gt;可以将耗时的执行路径（如：网络请求）放在其他线程中执行&lt;br/&gt;创建线程的目的就是为了开启一条新的路径，运行指定的代码与主线程中的代码实现同时运行。&lt;/p&gt;
+
+</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>多线程之   NSThread</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1、使用NSThread对象建立一个线程非常方便&lt;br/&gt;2、但是！要使用NSThread管理多个线程非常困难，不推荐使用&lt;br/&gt;3、技巧！使用[NSThread currentThread]跟踪任务所在的线程，适用于这三种技术&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>多线程之   GCD</string>
+		<key>detail</key>
+		<string>&lt;p&gt;Grand  Central Dispatch   大中心调度&lt;br/&gt;1、是基于C语言的底层API&lt;br/&gt;2、用Block定义任务，使用起来非常灵活便捷&lt;br/&gt;3、提供了更多的控制能力以及操作队列中所不能使用的底层函数&lt;br/&gt;提示：IOS的开发者，需要了解三种多线程技术的基本使用，因为在实际开发中会根据实际情况选择不同的多线程技术&lt;br/&gt;多线程技术的目的，就是为了在一个CPU上实现快速切换，达到并发效果&lt;br/&gt;&lt;br/&gt;GCD的函数都是以dispatch（分派、调度）开头的    （大中央调度）&lt;br/&gt;队列dispatch_queue_t： （先进先出）&lt;br/&gt;串行队列，队列中的任务只会顺序执行&lt;br/&gt;&lt;br/&gt;并行队列，队列中的任务通常会并发执行操作：&lt;br/&gt;dispatch_async异步操作，会并发执行，无法确定任务的执行顺序&lt;br/&gt;dispatch_sync同步操作，会依次顺序执行，能够决定任务的执行顺序&lt;br/&gt;&lt;br/&gt;通过GCD开发者不需要直接跟线程打交道，只需要向队列中添加代码块即可&lt;br/&gt;GCD在后端管理着一个线程池，GCD不仅决定着代码块将在哪个线程被执行，它还根据可用的系统资源对这些线程进行管理，从而让开发者从线程管理的工作中解放出来，通过集中的管理线程，缓解大量线程被创建的问题使用GCD，开发者可以将工作考虑为一个队列，而不是一堆线程，这种并行的抽象模型更容易掌握和使用&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>多线程之   NSOperation/NSOperationQueue</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1、是使用GCD实现的一套OC的API&lt;br/&gt;2、是面向对象的线程技术&lt;br/&gt;3、提供了一些在GCD中不容易实现的特性，如：限制最大并发数量，操作之间的依赖关系&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>XML解析</string>
+		<key>detail</key>
+		<string>&lt;p&gt;1、开始解析XML文档&lt;br/&gt;-(void)parserDidStartDocument;&lt;br/&gt;2、开始解析某个元素，会遍历整个XML，识别元素节点名称&lt;br/&gt;-(void)parser:didStartElement:namespaceURI:qualifiedName:attributes:&lt;br/&gt;3、文本节点，得到文本节点里存储的信息数据，对于大数据可能会接受多次！为了节约内存开销&lt;br/&gt;-(void)parser:foundCharacters:&lt;br/&gt;4、结束某个节点,存储从parser:foundCharacter：方法中获取到的信息&lt;br/&gt;-(void)parser:didEndElement:namespaceURI:qualifiedName:&lt;br/&gt;注意：在解析的过程中2.3.4.三个方法会不停的重复执行，知道遍历完成为止&lt;br/&gt;5、解析XML文档结束&lt;br/&gt;-(void)parserDidEndDocument:&lt;br/&gt;6、解析出错&lt;br/&gt;-(void)parser:parseErrorOccurred:&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>异步加载数据</string>
+		<key>detail</key>
+		<string>&lt;p&gt;NSURLRequest *request =[NSURLRequest   requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy  timeoutInterVal:5.0]&lt;br/&gt;cachePolicy(缓存策略-枚举)：默认0&lt;br/&gt;timeoutInterVal：超时时长 (限定时间内没有响应，就认为超时了)&lt;br/&gt;0：使用协议的缓存策略（默认）&lt;br/&gt;1：忽略本地缓存数据 &lt;br/&gt;2：返回缓存数据 否则 加载&lt;br/&gt;3：如果有缓存数据，就返回缓存数据，没有网络时可以使用（离线查看）&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>序列化和反序列化</string>
+		<key>detail</key>
+		<string>&lt;p&gt;序列化：向网络发送数据前，序列化将要发送的&quot;对象&quot;转换成0101格式的二进制数据流&lt;br/&gt;反序列化：从网络接受到的二进制的数据，将该数据转换成程序中需要使用的对象&lt;br/&gt;如果是网络模型，涉及到数字部分，统一使用NSNumber，能够防止很多错误&lt;br/&gt;将模型数字用NSNumber并且是copy类型    @(userInfo.userId)整数转化成NSNumber&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>AFN 与 ASI 有什么区别</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	•	AFN基于NSURL，ASI基于底层的CFNetwork框架，因此ASI的性能优于AFN&lt;br/&gt;•	AFN采取block的方式处理请求，ASI最初采取delegate的方式处理请求，后面也增加了block的方式&lt;br/&gt;•	AFN只封装了一些常用功能，满足基本需求，直接忽略了很多扩展功能，比如没有封装同步请求；ASI提供的功能较多，预留了各种接口和工具供开发者自行扩展&lt;br/&gt;•	AFN直接解析服务器返回的JSON、XML等数据，而ASI比较原始，返回的是NSData二进制数据&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>8</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>http协议的实现</string>
+		<key>detail</key>
+		<string>&lt;p&gt;客户端安全性处理方式？&lt;br/&gt;•	网络数据传输(敏感数据[账号\密码\消费数据\银行卡账号], 不能明文发送)&lt;br/&gt;•	协议的问题(自定义协议, 游戏代练)&lt;br/&gt;•	本地文件存储(游戏的存档)&lt;br/&gt;•	源代码(混淆)&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>有些图片加载的比较慢怎么处理?你是怎么优化程序的性能的?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	图片下载放在异步线程&lt;br/&gt;•	图片下载过程中使用占位图片&lt;br/&gt;•	如果图片较大，可以考虑多线程断点下载&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>App需要加载超大量的数据，给服务器发送请求，但是服务器卡住了如何解决？</string>
+		<key>detail</key>
+		<string>	&lt;p&gt;•	设置请求超时&lt;br/&gt;•	给用户提示请求超时&lt;br/&gt;•	根据用户操作再次请求数据&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>SDWebImage具体如何实现</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	利用NSOperationQueue和NSOperation下载图片, 还使用了GCD的一些函数(解码GIF图片)&lt;br/&gt;•	利用URL作为key，NSOperation作为value&lt;br/&gt;•	利用URL作为key，UIImage作为value&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>6</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>你们项目中都用了哪些框架, 及何种开发工具,具体到是哪个版本,这个版本的特性有哪些???(比如xcode的版本)</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	AFN、SDWebImage、MBProgressHUD等 (搜索: 网易新闻 第三方库)&lt;br/&gt;•	Xcode 5.0&lt;br/&gt;&lt;br/&gt;即时通讯中的大数据处理&lt;br/&gt;用put上传到文件服务器，然后发带url的自定义格式的给对方，对方接收到之后下载&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>如果在网络数据处理过程中,发现一处比较卡,一般怎么解决</string>
+		<key>detail</key>
+		<string>&lt;p&gt;•	检查网络请求操作是否被放在主线程了&lt;br/&gt;•	看看异步请求的数量是否太多了（子线程数量）&lt;br/&gt;•	数据量是否太大？如果太大，先清除一些不必要的对象（看不见的数据、图片）&lt;br/&gt;•	手机CPU使用率和内存问题&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>运行时的工作原理,OC动态</string>
+		<key>detail</key>
+		<string>&lt;p&gt;运行时机制就是直到程序运行时才去决定一个对象的类别.多态就是不同对象以自己的方式去响应相同的消息的能力叫多台.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>GET请求和POST请求区别</string>
+		<key>detail</key>
+		<string>&lt;p&gt;GET请求是将请求参数拼接到url中的,POST请求是将请求参数以请求体形式发送,对服务器而言POST请求是不安全的. 对用户而言GET请求是不安全的.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>4</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>你做的项目是否涉及网络访问功能,使用什么对象完成网络功能</string>
+		<key>detail</key>
+		<string>	&lt;p&gt;AFHTTPRequestOperationManager对象 和 NSURLConnection&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>在项目什么时候选择使用GCD,什么时候选择NSOperation?</string>
+		<key>detail</key>
+		<string>&lt;p&gt;NSOperation更加面向对象,建议在较复杂的项目中使用.&lt;br/&gt;GCD优点是本身非常简单易用,对于不复杂的多线程操作,会节省代码.而block参数的使用,会使代码更为易读,建议在简单项目中使用&lt;/p&gt;
+</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>死锁的4个必要条 件</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：互斥、请求保持、不可剥夺、环路&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>死锁的处理</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：鸵鸟策略、预防策略、避免策略、检测与解除死锁&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>进程死锁的原因</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：资源竞争及进程推进顺序非法&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>列举几种进程的同步机制，并比较其优缺点。</string>
+		<key>detail</key>
+		<string>&lt;p&gt;答案：  原子操作信号量机制    自旋锁    管程，会合，分布式系统 &lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>在Iphone上有两件事情要做,请问实在一个线程上效率高还是2个.</string>
+		<key>detail</key>
+		<string>&lt;p&gt;	更新UI一定要在主线程上执行,网络请求类可以开辟一条子线程去执行效率高,提高用户体验.&lt;/p&gt;</string>
+		<key>itemType</key>
+		<string>2</string>
+		<key>zan</key>
+		<integer>2</integer>
+	</dict>
+</array>
+</plist>

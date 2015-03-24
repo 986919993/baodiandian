@@ -25,16 +25,16 @@
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
-    CGFloat imageX = self.frame.size.width * 0.6;
-    CGFloat imageY = 0;
+    CGFloat imageX = self.frame.size.width * 0.5;
+    CGFloat imageY = self.frame.size.width * 0.5-4;
     CGFloat imageW = self.frame.size.width * 0.4;
-    CGFloat imageH = self.frame.size.height;
+    CGFloat imageH = 23;
     return  CGRectMake(imageX, imageY, imageW, imageH);
 }
 - (CGRect)titleRectForContentRect:(CGRect)contentRect
 {
-    CGFloat titleX = 0;
-    CGFloat titleY = 0;
+    CGFloat titleX = 3;
+    CGFloat titleY = 2;
     CGFloat titleW = self.frame.size.width * 0.6;
     CGFloat titleH = self.frame.size.height;
     return  CGRectMake(titleX , titleY, titleW, titleH);
@@ -42,7 +42,8 @@
 
 - (void)setZan:(NSNumber *)zan{
     _zan = zan;
-    NSString *title = [_zan stringValue];
+    NSString *title = [NSString stringWithFormat:@"%@",zan];
+//    NSLog(@"%@",title);
     [self setTitle:title forState:UIControlStateNormal];
 }
 

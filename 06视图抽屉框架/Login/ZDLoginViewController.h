@@ -7,10 +7,11 @@
 //
 
 #import "ZDCommonViewController.h"
-#import <TencentOpenAPI/TencentOAuth.h>
-@interface ZDLoginViewController : ZDCommonViewController<TencentSessionDelegate>
+@interface ZDLoginViewController : ZDCommonViewController
 {
-    TencentOAuth * _tencentOAuth;
+    NSMutableArray* _permissions;
+    UILabel                *_labelTitle;
+    UILabel                *_labelAccessToken;
     //    UIWindow * window;
 }
 

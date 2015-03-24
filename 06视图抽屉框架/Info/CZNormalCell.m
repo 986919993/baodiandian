@@ -25,7 +25,6 @@
 - (void)setDict:(NSDictionary *)dict
 {
     _dict = dict;
-    
     // 设置表格内容
     [self.icon sd_setImageWithURL:dict[ZDImgSrcKey]];
     self.title.text = dict[ZDTitleKey];

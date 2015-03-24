@@ -43,21 +43,12 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
     [manager GET:self.articleURLStr parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *dict) {
-        
-        [dict writeToFile:@"/Users/apple/Desktop/321.plist" atomically:YES];
         // 根据数据字典内容，创建HTML字符串，创建之后，用WebView加载
         [self htmlTextWithDict:dict[self.docid]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
     }];
     
-    
-//    [ZDHttpTool getWithUrl:self.articleURLStr params:nil success:^(NSDictionary *dict) {
-//        // 根据数据字典内容，创建HTML字符串，创建之后，用WebView加载
-//        [self htmlTextWithDict:dict[self.docid]];
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@", error);
-//    }];
 }
 
 // 根据数据字典内容，创建HTML字符串，创建之后，用WebView加载
@@ -65,7 +56,7 @@
 {
     // 建立一个可变字符串
     NSMutableString *html = [NSMutableString string];
-    
+
     // 0. CSS
     [html appendString:@"<style type='text/css'>h1{font-size:18px;} img{width:300px;}</style>"];
 
@@ -77,7 +68,7 @@
     
     // 3. 正文
     [html appendFormat:@"%@", [self bodyTextWithDict:dict]];
-    
+//    NSLog(@"%@",html);
     [self.webView loadHTMLString:html baseURL:nil];
 }
 

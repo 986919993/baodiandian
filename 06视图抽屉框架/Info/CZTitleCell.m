@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *iphoneView;
 @property (weak, nonatomic) IBOutlet UIButton *scienceInfo;
 @property (nonatomic,strong) UIButton *selectedBtn;
+@property (weak, nonatomic) IBOutlet UIView *navView;
 
 @end
 
@@ -49,10 +50,8 @@
     }];
 }
 - (void)awakeFromNib{
-    NSLog(@"唤醒XIB");
 }
 -(void)dealloc{
-    NSLog(@"销毁头");
 }
 
 
@@ -60,7 +59,7 @@
 - (void)setDict:(NSDictionary *)dict
 {
     _dict = dict;
-    
+
     [self.icon sd_setImageWithURL:dict[ZDImgSrcKey]];
     self.title.text = dict[ZDTitleKey];
 }

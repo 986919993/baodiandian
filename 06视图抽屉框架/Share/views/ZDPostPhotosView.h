@@ -1,0 +1,24 @@
+//
+//  IWComposePhotosView.h
+//  传智微博
+//
+//  Created by apple on 14-7-15.
+//  Copyright (c) 2014年 itcast. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ZDPostPhotosView : UIView
+
+@property (nonatomic, weak) UIButton *button;
+/**
+ *  添加显示的图片
+ *
+ *  @param image 要显示的图片
+ */
+- (void)addImage:(UIImage *)image;
+/**
+ *  返回用户选中的所有图片
+ */
+- (NSArray *)images;
+@end

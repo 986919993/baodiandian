@@ -20,6 +20,10 @@
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
 #import "UIImageView+WebCache.h"
+#import "Reachability.h"
+#import "ZDInfoCacheTool.h"
+#import "UIImage+NJ.h"
+
 
 static NSString *TitleCellID = @"TitleCell";
 static NSString *NormalCellID = @"NormalCell";
@@ -34,22 +38,15 @@ static NSString *PhotosID = @"photosCell";
 @property (nonatomic,strong) CZTitleCell *titleCell;
 
 @property (nonatomic,assign) BOOL isScience;
-
+@property (nonatomic,assign) BOOL settingEdge;
+@property (nonatomic,assign) BOOL huancun;
+@property (nonatomic, strong) UIButton *postButton;
+@property (nonatomic, strong) UIButton *homeButton;
 @end
 
 @implementation ZDInfoViewController
 
 
-- (void)loadScienceNews{
-    [ZDHttpTool getWithUrl:@"http://c.3g.163.com/nc/article/headline/T1348649580692/0-20.html" params:nil success:^(NSDictionary *dict) {
-        self.dataList = dict[ZDScience];
-        self.isMore = NO;
-        self.isScience = YES;
-        [self.tableView headerEndRefreshing];
-    } failure:^(NSError *error) {
-        [self.tableView headerEndRefreshing];
-    }];
-}
 
 
 - (void)setDataList:(NSMutableArray *)dataList
@@ -63,9 +60,62 @@ static NSString *PhotosID = @"photosCell";
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage resizableImageNamed:@"viewBG"]];
-//    self.title = @"网易新闻";
+    self.title = @"新闻资讯";
     [self setupRefresh];
     [self regCellNibs];
+    self.huancun = YES;
+    //    [self.navigationItem.leftBarButtonItem setAction:@selector(presentLeftMenuViewController:)];
+    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right"
+    //                                                                             style:UIBarButtonItemStylePlain
+    //                                                                            target:self
+    //                                                                            action:@selector(presentLeftMenuViewController:)];
+    
+    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Right"
+    //                                                                              style:UIBarButtonItemStylePlain
+    //                                                                             target:self
+    //                                                                             action:@selector(presentRightMenuViewController:)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"leftmenu_geren2"] style:UIBarButtonItemStyleDone target:self action:@selector(presentLeftMenuViewController:)];
+     [self.navigationItem.leftBarButtonItem setCustomView:self.homeButton];
+}
+- (UIButton *)homeButton{
+    if (!_homeButton) {
+        _homeButton = [[UIButton alloc] init];
+        _homeButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_homeButton setBackgroundImage:[UIImage imageWithNamed:@"leftmenu_geren2"] forState:UIControlStateNormal];
+        [_homeButton setBackgroundImage:[UIImage imageWithNamed:@"leftmenu_geren1"] forState:UIControlStateHighlighted];
+        //        [_postButton setTitle:@"发帖" forState:UIControlStateNormal];
+        _homeButton.frame = CGRectMake(0, 0, 36, 36);
+        [_homeButton addTarget:self action:@selector(presentLeftMenuViewController:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _homeButton;
+}
+//- (UIButton *)postButton{
+//    if (!_postButton) {
+//        _postButton = [[UIButton alloc] init];
+//        _postButton.titleLabel.font = [UIFont systemFontOfSize:13];
+//        [_postButton setBackgroundImage:[UIImage imageWithNamed:@"leftmenu_pingjia2"] forState:UIControlStateNormal];
+//        [_postButton setBackgroundImage:[UIImage imageWithNamed:@"leftmenu_pingjia1"] forState:UIControlStateHighlighted];
+//        _postButton.frame = CGRectMake(0, 0, 36, 36);
+//        [_postButton addTarget:self action:@selector(post) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _postButton;
+//}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+//    if (iOS7 && !self.settingEdge) {
+//        self.tableView.contentInset = UIEdgeInsetsMake(2, 0, 50, 0);
+//        _settingEdge = YES;
+//    }
+    if(iOS7)    {
+        
+        self.edgesForExtendedLayout = NO;
+        
+        self.navigationController.navigationBar.opaque=YES;
+        
+    }
 }
 
 - (void)titleCellDidSelect:(CZTitleCellSelectedNavType)navType{
@@ -75,8 +125,12 @@ static NSString *PhotosID = @"photosCell";
     }else {
         self.isScience = YES;
         [self loadScienceNews];
-
     }
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    // TODO 做些过滤
+    return NO;
 }
 
 
@@ -89,32 +143,49 @@ static NSString *PhotosID = @"photosCell";
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreIphoneNews)];
     // 首次登陆转菊花
     [self.tableView headerBeginRefreshing];
-    //设置额外的滚动区域
-    self.tableView.contentInset = UIEdgeInsetsMake(5, 0, 64, 0);
+//    设置额外的滚动区域
+//    self.tableView.contentInset = UIEdgeInsetsMake(5, 0, 64, 0);
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)loadIphoneNews{
-    NSString *url = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/headline/T1348649654285/0-20.html"];
+    NSString *url = [NSString stringWithFormat:ZDIphoneNew20];
     if (self.isScience) {
-        url = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/headline/T1348649580692/0-20.html"];
+        url = [NSString stringWithFormat:ZDKeJiNew20];
     }
-    [ZDHttpTool getWithUrl:url params:nil success:^(NSDictionary *dict) {
-        
-        NSMutableArray *array = dict[ZDIPhoneInfo];
-        if (self.isScience) {
-            array = dict[@"T1348649580692"];
-        }
+    NSDictionary *dicts = [ZDInfoCacheTool newsStatusWith:@"1" index:1];
+    //    NSLog(@"%d",arrayM.count);
+    NSInteger inter = [self netWork];
+    
+    if (inter == 0) {
+        NSMutableArray  *array = dicts[ZDIPhoneInfo];
         self.dataList = array;
         self.isMore = NO;
-//        NSLog(@"%@",self.dataList);
-        
-        
-        [self.tableView headerEndRefreshing];
-    } failure:^(NSError *error) {
-        [self.tableView headerEndRefreshing];
-    }];
-}
 
+        [self.tableView headerEndRefreshing];
+    }else{
+        [ZDHttpTool getWithUrl:url params:nil success:^(NSDictionary *dict) {
+            
+            NSMutableArray *array = nil;
+            //        NSLog(@"%@",dict);
+            if (self.isScience) {
+                array = dict[ZDScience];
+                
+            }else{
+                array =dict[ZDIPhoneInfo];
+                [ZDInfoCacheTool saveStatus:dict date:@"s"];
+            }
+            self.dataList = array;
+            self.isMore = NO;
+            
+            [self.tableView headerEndRefreshing];
+        } failure:^(NSError *error) {
+            [self.tableView headerEndRefreshing];
+            
+        }];
+        
+    }
+}
 - (void)loadMoreIphoneNews{
     if (self.isMore) {
         [self.tableView footerEndRefreshing];
@@ -132,23 +203,39 @@ static NSString *PhotosID = @"photosCell";
 
     [ZDHttpTool getWithUrl:url params:nil success:^(NSDictionary *dict) {
         
-        // 定义可变数组保存statusFrame模型
+//        定义可变数组保存statusFrame模型
 //        NSMutableArray *model = [[NSMutableArray alloc]init];
         
         NSMutableArray *array = dict[ZDIPhoneInfo];
+        NSMutableArray *temp = [[NSMutableArray alloc]init];
         if (self.isScience) {
             array = dict[@"T1348649580692"];
+            [temp addObjectsFromArray:self.dataList];
+            [temp addObjectsFromArray:array];
+
+            self.dataList = temp;
+        }else{
+            [temp addObjectsFromArray:self.dataList];
+            [temp addObjectsFromArray:array];
+            self.dataList = temp;
         }
-        // 循环遍历所有微博数据 将status模型存放到statusFrame中
-//        NSLog(@"%d",array.count);
-//        [array addObjectsFromArray:self.dataList];
-        self.dataList = array;
+        
         [self.tableView footerEndRefreshing];
     } failure:^(NSError *error) {
-        NSLog(@"%@", error);
         [self.tableView footerEndRefreshing];
     }];
 }
+- (void)loadScienceNews{
+    [ZDHttpTool getWithUrl:@"http://c.3g.163.com/nc/article/headline/T1348649580692/0-20.html" params:nil success:^(NSDictionary *dict) {
+        self.dataList = dict[ZDScience];
+        self.isMore = NO;
+        self.isScience = YES;
+        [self.tableView headerEndRefreshing];
+    } failure:^(NSError *error) {
+        [self.tableView headerEndRefreshing];
+    }];
+}
+
 // 为表格注册可重用的cell
 - (void)regCellNibs
 {
@@ -163,7 +250,6 @@ static NSString *PhotosID = @"photosCell";
     // 注册图集NIB
     UINib *PhotosNib = [UINib nibWithNibName:@"CZPhotosCell" bundle:nil];
     [self.tableView registerNib:PhotosNib forCellReuseIdentifier:PhotosID];
-    
 
 }
 
@@ -191,7 +277,6 @@ static NSString *PhotosID = @"photosCell";
     }else{
         cell = [tableView dequeueReusableCellWithIdentifier:NormalCellID];
     }
-
     // 设置cell
     cell.dict = self.dataList[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -201,9 +286,9 @@ static NSString *PhotosID = @"photosCell";
 // 设置行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *isPhotos = self.dataList[indexPath.row][@"docid"];
+//    NSString *isPhotos = self.dataList[indexPath.row][@"docid"];
     NSArray *array = self.dataList[indexPath.row][@"imgextra"];
-    NSRange range = [isPhotos rangeOfString:@"_" options:NSBackwardsSearch];
+//    NSRange range = [isPhotos rangeOfString:@"_" options:NSBackwardsSearch];
     if (indexPath.row == 0) {
         return [CZTitleCell rowHeight];
     } else if(array.count!= 0){
@@ -229,6 +314,7 @@ static NSString *PhotosID = @"photosCell";
         NSString *image1 = self.dataList[indexPath.row][@"imgsrc"];
         NSString *image2 = self.dataList[indexPath.row][@"imgextra"][0][@"imgsrc"];
         NSString *image3 = self.dataList[indexPath.row][@"imgextra"][1][@"imgsrc"];
+        
         NSURL *url1 = [NSURL URLWithString:image1];
         [imageView1 sd_setImageWithURL:url1];
         NSURL *url2 = [NSURL URLWithString:image2];
@@ -281,5 +367,20 @@ static NSString *PhotosID = @"photosCell";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-
+/** 检测当前网络 0没网  1移动3G  2wifi */
+- (NSInteger )netWork{
+    Reachability *reacha = [[Reachability alloc]init];
+    NSInteger inter = reacha.currentNetwork;
+    if (inter == 0) {
+//        [self showNetMessage:@"网络不给力.."];
+        return inter;
+    }else if (inter == 1){
+//        [self showNetMessage:@"当前为3G网络"];
+        return inter;
+    }else if (inter == 2){
+//        [self showNetMessage:@"当前Wi-Fi已连接"];
+        return inter;
+    }
+    return inter;
+}
 @end

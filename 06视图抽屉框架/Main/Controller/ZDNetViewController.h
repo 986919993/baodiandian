@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZDNetViewController : UIViewController
+@interface ZDNetViewController : UITableViewController
 
 @end

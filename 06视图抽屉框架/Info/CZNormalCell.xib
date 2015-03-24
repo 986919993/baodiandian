@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,31 +15,53 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vtz-kr-BLX">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vtz-kr-BLX">
                         <rect key="frame" x="10" y="10" width="80" height="60"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Cy1-2a-w5a"/>
+                            <constraint firstAttribute="width" constant="80" id="lhF-ih-nMH"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="奥巴马支持日解禁集体自卫权" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7b-Zb-cPw">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奥巴马支持日解禁集体自卫权" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7b-Zb-cPw">
                         <rect key="frame" x="100" y="10" width="210" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="hJ8-HX-X4Y"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="美国国防部长：通过行使集体自卫权，将使美日同盟更有效。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="210" translatesAutoresizingMaskIntoConstraints="NO" id="Ndh-kN-4CS">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="美国国防部长：通过行使集体自卫权，将使美日同盟更有效。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="210" translatesAutoresizingMaskIntoConstraints="NO" id="Ndh-kN-4CS">
                         <rect key="frame" x="100" y="29" width="210" height="41"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="41" id="jab-dv-Puw"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20000跟帖" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TD-4F-9m2">
-                        <rect key="frame" x="247" y="61" width="63" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20000跟帖" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TD-4F-9m2">
+                        <rect key="frame" x="247" y="57" width="63" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="SN0-oF-3c7"/>
+                            <constraint firstAttribute="width" constant="63" id="awN-4b-pMZ"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="7TD-4F-9m2" secondAttribute="bottom" constant="1" id="0vH-uP-6rw"/>
+                    <constraint firstItem="Ndh-kN-4CS" firstAttribute="top" secondItem="CVb-os-cKd" secondAttribute="topMargin" constant="21" id="Bwu-Cm-8f5"/>
+                    <constraint firstItem="Vtz-kr-BLX" firstAttribute="top" secondItem="CVb-os-cKd" secondAttribute="topMargin" constant="2" id="FJA-Yz-7be"/>
+                    <constraint firstItem="Ndh-kN-4CS" firstAttribute="leading" secondItem="Vtz-kr-BLX" secondAttribute="trailing" constant="10" id="HB0-sO-TMK"/>
+                    <constraint firstItem="Vtz-kr-BLX" firstAttribute="leading" secondItem="CVb-os-cKd" secondAttribute="leadingMargin" constant="2" id="YUv-67-DaU"/>
+                    <constraint firstItem="n7b-Zb-cPw" firstAttribute="leading" secondItem="Vtz-kr-BLX" secondAttribute="trailing" constant="10" id="aWa-Xf-cud"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="n7b-Zb-cPw" secondAttribute="trailing" constant="2" id="b2f-fg-DTD"/>
+                    <constraint firstAttribute="trailing" secondItem="7TD-4F-9m2" secondAttribute="trailing" constant="10" id="k9h-M9-U46"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ndh-kN-4CS" secondAttribute="trailing" constant="2" id="ohQ-5B-fLx"/>
+                    <constraint firstItem="n7b-Zb-cPw" firstAttribute="top" secondItem="CVb-os-cKd" secondAttribute="topMargin" constant="2" id="yND-r1-KpD"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="digest" destination="Ndh-kN-4CS" id="B0G-Sh-Erc"/>
@@ -47,4 +71,9 @@
             </connections>
         </tableViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

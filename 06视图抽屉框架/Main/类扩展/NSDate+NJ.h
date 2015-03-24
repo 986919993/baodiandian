@@ -22,6 +22,9 @@
  */
 - (BOOL)isThisYear;
 
+- (BOOL)isZaoShang;
+- (BOOL)isXiaWu;
+- (BOOL)isWanShang;
 /**
  *  返回一个只有年月日的时间
  */

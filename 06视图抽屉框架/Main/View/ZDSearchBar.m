@@ -22,8 +22,10 @@
         UIImage *image = [UIImage imageWithNamed:@"searchbar_textfield_search_icon"];
         UIImageView *icon = [[UIImageView alloc]initWithImage:image];
         // 图片的宽
-        icon.width = 0;
-        icon.contentMode = UIViewContentModeLeft;
+        icon.width = 35;
+        icon.x = 10;
+        icon.height = 35;
+        icon.contentMode = UIViewContentModeCenter;
         // 设置提示文字
         self.placeholder = @"搜索";
         // 设置删除按钮
@@ -31,10 +33,25 @@
         self.borderStyle = UITextBorderStyleRoundedRect;
         self.leftView = icon;
         self.leftViewMode = UITextFieldViewModeAlways;
-//        self.backgroundColor = [UIColor redColor];
+        self.returnKeyType = UIReturnKeySearch;
+        // 注册通知中心
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged) name:UITextFieldTextDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChanged) name:UIKeyboardAnimationCurveUserInfoKey object:nil];
+        
     }
     return self;
 }
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)textChanged{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"text" object:self.text];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self resignFirstResponder];
+    return YES;
+}
+
 
 
 @end

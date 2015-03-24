@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZDItemDetailViewController : UITableViewController
+@interface ZDItemDetailViewController : UIViewController
 
 @property (nonatomic,strong) NSDictionary *dict;
 

@@ -18,18 +18,6 @@
  */
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-//    [encoder encodeObject:self.nickname forKey:@"nickname"];
-//    [encoder encodeObject:self.city forKey:@"city"];
-//    [encoder encodeObject:self.figureurl_qq_1 forKey:@"figureurl_qq_1"];
-//    [encoder encodeObject:self.figureurl_qq_2 forKey:@"figureurl_qq_2"];
-//    [encoder encodeObject:self.gender forKey:@"gender"];
-//    
-//    [encoder encodeObject:self.access_token forKey:@"access_token"];
-//    [encoder encodeObject:self.uid forKey:@"uid"];
-//    [encoder encodeObject:self.remind_in forKey:@"remind_in"];
-//    [encoder encodeObject:self.expires_in forKey:@"expires_in"];
-//    [encoder encodeObject:self.expires_time forKey:@"expires_time"];
-    
     unsigned int count = 0;
     // 1.获取指定类中所有的属性
     Ivar * vars = class_copyIvarList([self class], &count);
@@ -57,21 +45,6 @@
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super init]) {
-        
-//        self.nickname = [decoder decodeObjectForKey:@"nickname"];
-//        self.city = [decoder decodeObjectForKey:@"city"];
-//        self.figureurl_qq_1 = [decoder decodeObjectForKey:@"figureurl_qq_1"];
-//        self.figureurl_qq_2 = [decoder decodeObjectForKey:@"figureurl_qq_2"];
-//        self.gender = [decoder decodeObjectForKey:@"gender"];
-//        
-//        
-//        self.access_token = [decoder decodeObjectForKey:@"access_token"];
-//        self.remind_in = [decoder decodeObjectForKey:@"remind_in"];
-//        self.expires_in = [decoder decodeObjectForKey:@"expires_in"];
-//        self.uid = [decoder decodeObjectForKey:@"uid"];
-//        self.expires_time = [decoder decodeObjectForKey:@"expires_time"];
-        
-        
         unsigned int count = 0;
         // 1.获取指定类中所有的属性   Ivar运行时成员变量
         Ivar * vars = class_copyIvarList([self class], &count);
@@ -103,7 +76,6 @@
     NSDate *now = [NSDate date];
     // 最终过期的时间 = 当前时间+多少秒之后过期
     account.expires_time = [now dateByAddingTimeInterval:account.expires_in.doubleValue];
-    
     return account;
 }
 

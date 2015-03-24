@@ -8,6 +8,6 @@
 
 #import "ZDCommonViewController.h"
 
-@interface ZDUserViewController : ZDCommonViewController
+@interface ZDUserViewController : UITableViewController
 
 @end
