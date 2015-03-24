@@ -1,0 +1,161 @@
+//
+//  DJBConsultModel.m
+//  DJB项目
+//
+//  Created by huan on 14-7-23.
+//  Copyright (c) 2014年 huan. All rights reserved.
+//
+
+#import "DJBStatusesModel.h"
+#include "DJBShareFrame.h"
+#import "NSDate+NJ.h"
+
+#import "MJExtension.h"
+
+#import <BmobSDK/Bmob.h>
+
+#import <BmobSDK/BmobObject.h>//"BmobObject.h"
+#import <BmobSDK/BmobQuery.h>//"BmobQuery.h"
+#import <BmobSDK/BmobFile.h>
+
+@interface DJBShareFrame ()
+
+//@property (nonatomic, strong) NSArray *statuses;
+
+@end
+
+@implementation DJBStatusesModel
+
+- (instancetype)initWithDict:(NSDictionary *)dict{
+    if (self = [super init]) {
+        
+        [self setValuesForKeysWithDictionary:dict];
+    }
+    return self;
+}
++ (instancetype)consultModelWithDict:(NSDictionary *)dict{
+    return  [[self alloc] initWithDict:dict];
+}
+
++ (NSArray *)consultModel{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"questions.plist" ofType:nil];
+    NSArray *array = [NSArray arrayWithContentsOfFile:path];
+    
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (NSDictionary  *dict in array) {
+        DJBStatusesModel *model = [DJBStatusesModel consultModelWithDict:dict];
+        DJBShareFrame *fra = [[DJBShareFrame alloc]init];
+        fra.statesesModel = model;
+        [arrayM addObject:fra];
+    }
+    return arrayM;
+}
+
+//+ (NSArray *)consultModel{
+//    BmobQuery *bquery = [BmobQuery queryWithClassName:@"IosUser"];
+//    
+//    bquery.limit = 10;//限制得到的结果条数为3条
+//    [bquery orderByDescending:@"updatedAt"];
+//    //查找IosUser表所有数据
+//   //__block NSMutableArray *arrM = [NSMutableArray array];
+//    [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+//        if (!error) {
+//          
+//        }
+//        
+//
+//    }];
+//  
+//    return _statusesAA;
+//
+//}
+
+//+ (NSArray *)refre:(NSArray *)array{
+////    NSLog(@"%@",array);
+//
+//    _statuses = array;
+//    NSLog(@"%@",_statuses);
+//    return _statuses;
+//}
+
+
+//- (NSMutableArray *)statuses{
+//    if (!_statuses) {
+//        
+//        
+//        _statuses = [NSMutableArray array];
+//        BmobQuery *bquery = [BmobQuery queryWithClassName:@"IosUser"];
+//        
+//        bquery.limit = 10;//限制得到的结果条数为3条
+//        [bquery orderByDescending:@"updatedAt"];
+//        
+//        //查找IosUser表所有数据
+//        
+//        [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+//            
+//            self.statuses = [array mutableCopy];
+//            [self refreshUI:self.statuses];
+//            
+//            
+//        }];
+//        
+//    }
+//    return _statuses;
+//}
+//
+
+
+/*
+- (NSString *)fbTime{
+    // 判断新浪返回给我们的时间和本地的时间, 返回对应的字符串
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
+#warning  注意如果是真机开发必须写上如下代码, 否则可能格式化出来的NSDate为null
+    // 告诉系统时间格式所属的区域
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    NSDate *createdTime = [formatter dateFromString:_fbTime];
+    
+    // 获取新浪时间和本地时间的差距
+    NSDateComponents *cmps = [createdTime deltaWithNow];
+    
+    if ([createdTime isThisYear]) {
+        // 今年
+        if ([createdTime isToday]) {
+            // 今天
+            if (cmps.hour >= 1) {
+                // 多少小时以前
+                return [NSString stringWithFormat:@"%d小时以前", cmps.hour];
+            }else if (cmps.minute >=1)
+            {
+                // 多少分钟以前  1~60
+                return [NSString stringWithFormat:@"%d分钟以前", cmps.minute];
+            }else
+            {
+                return @"刚刚";
+            }
+            
+        }else if ([createdTime isYesterday])
+        {
+            // 昨天
+            formatter.dateFormat = @"昨天: mm分ss";
+            return [formatter stringFromDate:createdTime];
+        }else
+        {
+            // 其它天
+            formatter.dateFormat = @"MM月dd日 mm分ss";
+            return [formatter stringFromDate:createdTime];
+        }
+    }else
+    {
+        // 非今年
+        formatter.dateFormat = @"yyyy年MM月dd日 mm分ss";
+        return [formatter stringFromDate:createdTime];
+    }
+    
+    
+    
+    return nil;
+}
+
+*/
+@end

@@ -1,0 +1,123 @@
+//
+//  DJBBottomVIew.m
+//  06视图抽屉框架
+//
+//  Created by huan on 14-8-4.
+//  Copyright (c) 2014年 itbast. All rights reserved.
+//
+
+#import "DJBBottomVIew.h"
+#import "DJBButton.h"
+
+#define DJBButtonWidth 40
+#define DJBButtonHeight 20
+
+@interface DJBBottomVIew ()
+/**
+ *  爽按钮
+ */
+@property (nonatomic, weak) DJBButton *shuangBtn;
+/**
+ *  坑按钮
+ */
+@property (nonatomic, weak) DJBButton *kengBtn;
+/**
+ *  评论按钮
+ */
+@property (nonatomic, weak)DJBButton *commentBtn;
+/**
+ *  分享按钮
+ */
+@property (nonatomic, strong)UIButton *shareBtn;
+/**
+ *  花边
+ */
+@property (nonatomic, strong)UIImageView *bottomImage;
+
+@end
+
+@implementation DJBBottomVIew
+
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.shuangBtn = [self setupBottomBtnWithImageName:@"shuang" buttontype:DJBButtonTypeShuang];
+        self.commentBtn = [self setupBottomBtnWithImageName:@"ping" buttontype:DJBButtonTypeCommon];
+        
+        [self setupShareBtn];
+        
+        
+        self.kengBtn = [self setupBottomBtnWithImageName:@"keng" buttontype:DJBButtonTypeKeng];
+    }
+    return self;
+}
+
+- (void)setupShareBtn{
+    self.shareBtn = [[UIButton alloc] init];
+    [self.shareBtn setImage:[UIImage imageWithNamed:@"share"] forState:UIControlStateNormal];
+    self.shareBtn.contentMode = UIViewContentModeCenter;
+    [self.shareBtn setBackgroundImage:[UIImage imageWithNamed:@"anniu_kuang"] forState:UIControlStateNormal];
+    self.shareBtn.tag = DJBButtonTypeShare;
+    [self.shareBtn addTarget:self action:@selector(buttonOnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.shareBtn];
+}
+
+- (DJBButton *)setupBottomBtnWithImageName:(NSString *)imageName buttontype:(NSInteger)buttontype{
+    DJBButton *button = [[DJBButton alloc] init];
+    [button setBackgroundImage:[UIImage imageWithNamed:@"anniu_kuang"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageWithNamed:imageName] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    button.tag = buttontype;
+    [button addTarget:self action:@selector(buttonOnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button];
+    return button;
+}
+
+- (void)buttonOnClicked:(UIButton *)button{
+
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    self.shuangBtn.x = 0;
+    self.shuangBtn.y = 0;
+    self.shuangBtn.width = DJBButtonWidth;
+    self.shuangBtn.height = DJBButtonHeight;
+    
+    self.kengBtn.x = CGRectGetMaxX(self.shuangBtn.frame);
+    self.kengBtn.y = 0;
+    self.kengBtn.width = DJBButtonWidth;
+    self.kengBtn.height = DJBButtonHeight;
+    
+    self.commentBtn.width = DJBButtonWidth;
+    self.commentBtn.x = self.width - DJBButtonWidth * 2;
+    self.commentBtn.height = DJBButtonHeight;
+    self.commentBtn.y = 0;
+    
+    
+    self.shareBtn.y = 0;
+    self.shareBtn.width = DJBButtonWidth;
+    self.shareBtn.x = self.width - DJBButtonWidth;
+    self.shareBtn.height = DJBButtonHeight;
+    
+    self.bottomImage.x = (self.width - self.superview.width) / 2;
+    self.bottomImage.y = CGRectGetMaxY(self.shareBtn.frame);
+    self.bottomImage.width = self.superview.width;
+    self.bottomImage.height = self.height - self.shareBtn.height;
+}
+
+#pragma mark 懒加载
+
+- (UIImageView *)bottomImage{
+    if (!_bottomImage) {
+        _bottomImage = [[UIImageView alloc] init];
+        _bottomImage.image = [UIImage imageWithNamed:@"bottomImage"];
+        [self addSubview:_bottomImage];
+    }
+    return _bottomImage;
+}
+
+
+@end

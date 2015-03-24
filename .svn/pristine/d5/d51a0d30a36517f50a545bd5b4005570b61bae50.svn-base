@@ -1,0 +1,26 @@
+//
+//  DJBShareCell.h
+//  06视图抽屉框架
+//
+//  Created by huan on 14-8-4.
+//  Copyright (c) 2014年 itbast. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@class DJBShareFrame,DJBShareCell;
+
+@protocol DJBShareCellDelegate <NSObject>
+
+- (void)shareCell:(DJBShareCell *)shareCell;
+
+@end
+
+@interface DJBShareCell : UITableViewCell
+
++ (instancetype)cellWithTableview:(UITableView *)tableView;
+
+@property (nonatomic, weak) id<DJBShareCellDelegate> delegate;
+
+@property (nonatomic, strong) DJBShareFrame *shareFrame;
+
+@end

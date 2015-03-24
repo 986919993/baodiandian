@@ -1,0 +1,95 @@
+//
+//  DJBConsultModel.m
+//  DJB项目
+//
+//  Created by huan on 14-7-23.
+//  Copyright (c) 2014年 huan. All rights reserved.
+//
+
+#import "DJBStatusesModel.h"
+#include "DJBShareFrame.h"
+#import "NSDate+NJ.h"
+
+#import "MJExtension.h"
+
+#import <BmobSDK/Bmob.h>
+
+#import <BmobSDK/BmobObject.h>//"BmobObject.h"
+#import <BmobSDK/BmobQuery.h>//"BmobQuery.h"
+#import <BmobSDK/BmobFile.h>
+
+@interface DJBShareFrame ()
+
+//@property (nonatomic, strong) NSArray *statuses;
+
+@end
+
+@implementation DJBStatusesModel
+
+- (NSString *)fbTime{
+    // 判断新浪返回给我们的时间和本地的时间, 返回对应的字符串
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
+
+//#warning  注意如果是真机开发必须写上如下代码, 否则可能格式化出来的NSDate为null
+//    // 告诉系统时间格式所属的区域
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+   
+    
+    NSDate *creatTime = [formatter dateFromString:_fbTime];
+    
+    // 获取新浪时间和本地时间的差距
+    NSDateComponents *cmps = [creatTime deltaWithNow];
+    
+    if ([creatTime isThisYear]) {
+        // 今年
+        if ([creatTime isToday]) {
+            // 今天
+            if (cmps.hour >= 1) {
+                // 多少小时以前
+                return [NSString stringWithFormat:@"%d小时以前", cmps.hour];
+               
+            }else if (cmps.minute >=1)
+            {
+                // 多少分钟以前  1~60
+                return [NSString stringWithFormat:@"%d分钟以前", cmps.minute];
+                
+            }else
+            {
+                return [NSString stringWithFormat:@"%d秒以前", cmps.second];
+            }
+            
+        }else if ([creatTime isYesterday])
+        {
+            // 昨天
+            formatter.dateFormat = @"昨天: HH时mm分";
+           
+            return  [formatter stringFromDate:creatTime];
+        }else
+        {
+            // 其它天
+            formatter.dateFormat = @"MM月dd日";
+            return  [formatter stringFromDate:creatTime];
+            
+        }
+    }else
+    {
+        // 非今年
+        formatter.dateFormat = @"yyyy年MM月dd日";
+        return  [formatter stringFromDate:creatTime];
+       
+    }
+    
+    
+    
+    return nil;
+}
+
+//- (void)setFbTime:(NSDate *)fbTime{
+//    BmobQuery *query = [BmobQuery queryWithClassName:@"ios_statuses"];
+//    //按updatedAt进行降序排列
+//    [query orderByDescending:@"updatedAt"];
+//    //返回最多20个结果
+//}
+
+@end

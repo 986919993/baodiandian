@@ -1,0 +1,58 @@
+//
+//  DJBConsultModel.h
+//  DJB项目
+//
+//  Created by huan on 14-7-23.
+//  Copyright (c) 2014年 huan. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <BmobSDK/Bmob.h>
+
+#import <BmobSDK/BmobObject.h>//"BmobObject.h"
+#import <BmobSDK/BmobQuery.h>//"BmobQuery.h"
+#import <BmobSDK/BmobFile.h>
+
+@interface DJBStatusesModel : BmobObject
+/**
+ *  头像
+ */
+@property (nonatomic, copy) NSString *icon;
+/**
+ *  发帖正文
+ */
+@property (nonatomic, copy) NSString *answer;
+/**
+ *  发帖人名字
+ */
+@property (nonatomic, copy) NSString *title;
+/**
+ *  发帖时间
+ */
+@property (nonatomic, copy) NSString *fbTime;
+/**
+ *  阅读次数
+ */
+@property (nonatomic, copy) NSString *readerCount;
+/**
+ *  头像
+ */
+@property (nonatomic, copy) NSString *imageName;
+/**
+ *  性别
+ */
+@property (nonatomic, assign, getter = isMan) BOOL man;
+/**
+ *  城市
+ */
+@property (nonatomic, copy) NSString *city;
+
+
+
+
+//- (instancetype)initWithDict:(NSDictionary *)dict;
+//+ (instancetype)consultModelWithDict:(NSDictionary *)dict;
+//
+//+ (NSArray *)consultModel;
+
+@end

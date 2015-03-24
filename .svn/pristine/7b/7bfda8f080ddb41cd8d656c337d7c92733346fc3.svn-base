@@ -1,0 +1,145 @@
+//
+//  DJBTopView.m
+//  06视图抽屉框架
+//
+//  Created by huan on 14-8-4.
+//  Copyright (c) 2014年 itbast. All rights reserved.
+//
+
+#import "DJBTopView.h"
+#import "DJBStatusesModel.h"
+#import "DJBShareFrame.h"
+#define DJBIconMargin 5
+
+
+@interface DJBTopView ()
+
+
+@property (nonatomic, weak) UILabel *name;
+
+/**
+ *  性别图片
+ */
+@property (nonatomic, weak) UIImageView *sexImage;
+@property (nonatomic, weak) UILabel *ShareTime;
+
+/**
+ *  用户城市
+ */
+@property (nonatomic, weak) UILabel *cityLabel;
+
+@end
+
+@implementation DJBTopView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupSubViews];
+    }
+    return self;
+}
+
+- (void)setupSubViews{
+    UIButton *iconImage = [[UIButton alloc] init];
+    iconImage.imageView.layer.cornerRadius = 8;
+    [self addSubview:iconImage];
+    self.iconImage = iconImage;
+    
+    
+    UILabel *name = [[UILabel alloc] init];
+    name.textColor = [UIColor redColor];
+    [self addSubview:name];
+    self.name = name;
+    
+    UIImageView *sexImage = [[UIImageView alloc] init];
+    [self addSubview:sexImage];
+    self.sexImage = sexImage;
+    
+    UILabel *shareTime = [[UILabel alloc] init];
+    shareTime.textColor = [UIColor lightGrayColor];
+    [self addSubview:shareTime];
+    self.ShareTime = shareTime;
+    
+    UILabel *cityLabel = [[UILabel alloc] init];
+    cityLabel.textColor = [UIColor blueColor];
+    [self addSubview:cityLabel];
+    self.cityLabel = cityLabel;
+}
+
+- (void)setShareFrame:(DJBShareFrame *)shareFrame{
+    _shareFrame = shareFrame;
+    DJBStatusesModel *statusesModel = _shareFrame.statesesModel;
+    
+    CGFloat iconImageX = DJBIconMargin;
+    CGFloat iconImageY = DJBIconMargin;
+    CGFloat iconImageW = 40;
+    CGFloat iconImageH = 40;
+    self.iconImage.frame = CGRectMake(iconImageX, iconImageY, iconImageW, iconImageH);
+    
+        self.name.font = [UIFont systemFontOfSize:13];
+    self.name.text = statusesModel.title;
+    CGFloat nameX = CGRectGetMaxX(self.iconImage.frame) + DJBIconMargin;
+    CGFloat nameY = DJBIconMargin;
+    CGFloat nameH = iconImageH * 0.5;
+    CGSize size = [self.name.text sizeWithFont:[UIFont systemFontOfSize:13]];
+    CGFloat nameW = size.width;
+    self.name.frame = CGRectMake(nameX, nameY, nameW, nameH);
+    
+    
+    
+    
+    
+    if (statusesModel.isMan) {
+        self.sexImage.image = [UIImage imageWithNamed:@"nan"];
+    }else{
+        self.sexImage.image = [UIImage imageWithNamed:@"nv"];
+    }
+    if (statusesModel.fbTime) {
+        self.ShareTime.text = statusesModel.fbTime;
+    }else{
+        self.ShareTime.text = nil;
+    }
+    
+    self.ShareTime.font = [UIFont systemFontOfSize:13];
+    
+    NSString *cityName = [NSString stringWithFormat:@"城市：%@",statusesModel.city];;
+    if (statusesModel.city) {
+        self.cityLabel.text = cityName;
+    }else{
+        self.cityLabel.text = nil;
+    }
+    self.cityLabel.font = [UIFont systemFontOfSize:13];
+    
+    [self.iconImage setImage:[UIImage imageNamed:statusesModel.icon] forState:UIControlStateNormal];
+ 
+    
+
+    
+    CGFloat sexImageX = CGRectGetMaxX(self.name.frame) + DJBIconMargin;
+    CGFloat sexImageY = nameY;
+    CGFloat sexImageW = nameH;
+    CGFloat sexImageH = sexImageW;
+    self.sexImage.frame = CGRectMake(sexImageX, sexImageY, sexImageW, sexImageH);
+    
+    CGFloat shareTimeX = nameX;
+    CGFloat shareTimeY = CGRectGetMaxY(self.name.frame);
+    CGSize shareSize = [self.ShareTime.text sizeWithFont:[UIFont systemFontOfSize:13]];
+    CGFloat shareTimeW = shareSize.width;
+    CGFloat shareTimeH = nameH;
+    self.ShareTime.frame = CGRectMake(shareTimeX, shareTimeY, shareTimeW, shareTimeH);
+    
+    CGFloat cityLabelX = CGRectGetMaxX(self.ShareTime.frame) + DJBIconMargin;
+    CGFloat cityLabelY = shareTimeY;
+    //    CGSize maxCitySize = CGSizeMake(200 , shareTimeH);
+    CGSize citySize = [self.cityLabel.text sizeWithFont:[UIFont systemFontOfSize:13]];
+    CGFloat cityLabelW = citySize.width;
+    CGFloat cityLabelH = shareTimeH;
+    self.cityLabel.frame = CGRectMake(cityLabelX, cityLabelY, cityLabelW, cityLabelH);
+}
+
+
+
+
+@end

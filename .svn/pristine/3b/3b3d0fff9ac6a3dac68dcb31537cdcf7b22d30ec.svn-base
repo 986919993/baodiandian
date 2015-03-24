@@ -1,0 +1,19 @@
+//
+//  DJBBottomVIew.h
+//  06视图抽屉框架
+//
+//  Created by huan on 14-8-4.
+//  Copyright (c) 2014年 itbast. All rights reserved.
+//
+typedef enum {
+    DJBButtonTypeShuang,
+    DJBButtonTypeKeng,
+    DJBButtonTypeCommon,
+    DJBButtonTypeShare
+}DJBButtonType;
+
+#import <UIKit/UIKit.h>
+
+@interface DJBBottomVIew : UIView
+
+@end

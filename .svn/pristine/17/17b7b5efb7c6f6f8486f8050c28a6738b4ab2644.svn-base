@@ -1,0 +1,155 @@
+//
+//  DJBShareCell.m
+//  06视图抽屉框架
+//
+//  Created by huan on 14-8-4.
+//  Copyright (c) 2014年 itbast. All rights reserved.
+//
+
+#import "DJBShareCell.h"
+#import "DJBBottomVIew.h"
+#import "DJBTopView.h"
+#import "DJBShareFrame.h"
+#import "DJBStatusesModel.h"
+#import "UIImageView+WebCache.h"
+
+@interface DJBShareCell ()
+
+@property (nonatomic, strong) UIImageView *bjImage;
+
+@property (nonatomic, strong) UIView *bgView;
+/**
+ *  顶部视图（包括个人头像，昵称，分享时间，分享正文）
+ */
+@property (nonatomic, weak) DJBTopView *topView;
+/**
+ *  分享正文
+ */
+@property (nonatomic, weak) UILabel *contextLabel;
+/**
+ *  分享图片视图
+ */
+@property (nonatomic, weak) UIImageView *shareImage;
+/**
+ *  底部视图（包括赞，评论，和分享共3个按钮）
+ */
+@property (nonatomic, weak) DJBBottomVIew *bottomView;
+
+@end
+
+@implementation DJBShareCell
+
++ (instancetype)cellWithTableview:(UITableView *)tableView{
+    static NSString *ID = @"share";
+    DJBShareCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[DJBShareCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    return cell;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundView = self.bjImage;
+        self.contentView.userInteractionEnabled = YES;
+//        初始化所有可能用到的子控件
+//        设置头部视图
+        [self setupTopView];
+//        设置分享正文视图
+        [self setupContextView];
+//        设置分享图片视图
+        [self setupImageView];
+//        设置底部视图
+        [self setupBottomView];
+    }
+    return self;
+}
+/**
+ *  设置头部视图
+ */
+- (void)setupTopView{
+    DJBTopView *topView = [[DJBTopView alloc] init];
+    [topView.iconImage addTarget:self action:@selector(personMessage) forControlEvents:UIControlEventTouchUpInside];
+    [self.bgView addSubview:topView];
+    self.topView = topView;
+}
+
+- (void)personMessage{
+    if ([self.delegate respondsToSelector:@selector(shareCell:)]) {
+        [self.delegate shareCell:self];
+    }
+}
+
+/**
+ *  设置分享图片视图
+ */
+- (void)setupContextView{
+    UILabel *contextlabel = [[UILabel alloc] init];
+//    contextlabel.backgroundColor = [UIColor lightGrayColor];
+    [self.bgView addSubview:contextlabel];
+    self.contextLabel = contextlabel;
+}
+
+/**
+ *   设置分享图片视图
+ */
+- (void)setupImageView{
+    UIImageView *shareImage = [[UIImageView alloc] init];
+    [self.bgView addSubview:shareImage];
+    self.shareImage = shareImage;
+}
+
+/**
+ *  设置底部视图
+ */
+- (void)setupBottomView{
+    DJBBottomVIew *bottomView = [[DJBBottomVIew alloc] init];
+    [self.bgView addSubview:bottomView];
+    self.bottomView = bottomView;
+}
+-(void)setShareFrame:(DJBShareFrame *)shareFrame
+{
+    _shareFrame = shareFrame;
+    DJBStatusesModel *statusesModel = _shareFrame.statesesModel;
+    _shareFrame.statesesModel = statusesModel;
+    
+    self.topView.frame = _shareFrame.topViewF;
+    self.topView.shareFrame = _shareFrame;
+    
+    self.contextLabel.frame = _shareFrame.contextLabelF;
+    self.contextLabel.numberOfLines = 0;
+    self.contextLabel.text = statusesModel.answer;
+    self.contextLabel.font = [UIFont systemFontOfSize:15];
+    self.shareImage.frame = _shareFrame.shareImageF;
+    
+
+    NSURL *url = [NSURL URLWithString:statusesModel.imageName];
+    [self.shareImage sd_setImageWithURL:url placeholderImage:[UIImage imageWithNamed:@"about"]];
+    self.bottomView.frame = _shareFrame.bottomViewF;
+    self.bgView.frame = _shareFrame.bgViewF;
+    
+}
+
+#pragma  mark 懒加载
+
+- (UIView *)bgView{
+    if (!_bgView) {
+        _bgView = [[UIView alloc] init];
+        _bgView.userInteractionEnabled = YES;
+        _bgView.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:_bgView];
+    }
+    return _bgView;
+}
+
+- (UIImageView *)bjImage{
+    if (!_bjImage) {
+        _bjImage = [[UIImageView alloc] initWithImage:[UIImage imageWithNamed:@"title_bg"]];
+    }
+    return _bjImage;
+}
+
+@end

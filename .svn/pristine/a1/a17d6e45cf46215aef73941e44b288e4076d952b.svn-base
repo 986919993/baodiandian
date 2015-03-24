@@ -1,0 +1,33 @@
+//
+//  UIImage+CZ.m
+//  05-小画板
+//
+//  Created by LNJ on 14-6-15.
+//  Copyright (c) 2014年 itcast. All rights reserved.
+//
+
+#import "UIImage+CZ.h"
+
+@implementation UIImage (CZ)
+
++ (UIImage *)captureFromView:(UIView *)view
+{
+    // 1> 开始图像上下文
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
+    
+    // 2> 取得的当前上下文就是图像上下文本身了
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    // 3> 使用图层渲染输出图像到上下文
+    [view.layer renderInContext:ctx];
+    
+    // 4> 拿到图像
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // 5> 关闭图像上下文
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
+@end

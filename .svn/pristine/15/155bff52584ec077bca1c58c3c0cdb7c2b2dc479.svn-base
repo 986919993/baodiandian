@@ -1,0 +1,76 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "UIBarButtonItem+NJ.h"
+    #import "UIImage+NJ.h"
+    #import "UIView+NJ.h"
+    #import "NSString+Extend.h"
+#ifdef DEBUG
+#define ZDLog(...)          NSLog(__VA_ARGS__)
+#else
+#define ZDLog(...)
+#endif
+// 随即颜色
+#define ZDRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:arc4random_uniform(255)/255.0]
+/** RGB颜色 */
+#define ZDColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:255/255.0];
+/** 是否是IOS7以上 */
+#define iOS7 ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
+/** 是否为4英寸屏 */
+#define Inch4 ([UIScreen mainScreen].bounds.size.height == 568.0)
+/** 屏幕宽度 */
+#define ZDWidth [UIScreen mainScreen].bounds.size.width;
+/** 背景颜色 */
+#define ZDGlobalColor ZDColor(219, 219, 219)
+/** 屏幕分辨率 */
+#define screenScale         [UIScreen mainScreen].scale
+/** 角度转弧度 */
+#define degree2angle(degree)    (((degree) * M_PI) / 180)
+/** 角度转弧度 */
+#define ZDAngle(degree)    (((degree) * M_PI) / 180)
+/** 折叠控制器TransForm */
+#define ZDTrans  CGAffineTransformMake(0.882386, 0.000000, 0.000000, 0.882386, 133.609589, 0.000000);
+/** 间距10 */
+#define ZDPadding 10
+// 0
+#define ZERO 0
+// 间距
+#define ZDPhotoW 70
+// 间距
+#define ZDPhotoH 70
+// 昵称的字体
+#define ZDNameFont [UIFont systemFontOfSize:16]
+// 正文的字体
+#define ZDContentFont [UIFont systemFontOfSize:15]
+// 时间字体
+#define ZDTimeFont [UIFont systemFontOfSize:12]
+// 来源字体
+#define ZDSourceFont ZDTimeFont
+// 转发微博昵称
+#define ZDRepostedNameFont ZDNameFont
+// 转发微博的正文
+#define ZDRepostedContentFont ZDContentFont
+/** 网易手机新闻 */
+#define ZDIPhoneInfo @"T1348649654285"
+/** 网易科技新闻 */
+#define ZDScience @"T1348649580692"
+/** 新浪微博AppKey */
+#define ZDAppKey @"2897435897"
+/** 新浪微博AppSecret */
+#define ZDAppSecret @"f3ac56a61c6d63e419f45c6bb69d9699"
+/** 新浪微博回调地址 */
+#define ZDAppRedirectUrl @"http://www.baidu.com"
+
+#endif

@@ -1,0 +1,75 @@
+//
+//  CZTitleCell.m
+//  05-网易新闻
+//
+//  Created by LNJ on 14-7-2.
+//  Copyright (c) 2014年 itcast. All rights reserved.
+//
+
+#import "CZTitleCell.h"
+#import "UIImageView+WebCache.h"
+
+@interface CZTitleCell()
+@property (weak, nonatomic) IBOutlet UIImageView *icon;
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UIView *redLineView;
+@property (weak, nonatomic) IBOutlet UIButton *iphoneView;
+@property (weak, nonatomic) IBOutlet UIButton *scienceInfo;
+@property (nonatomic,strong) UIButton *selectedBtn;
+@property (weak, nonatomic) IBOutlet UIView *navView;
+
+@end
+
+@implementation CZTitleCell
+
+
+- (IBAction)iphoneInfo:(id)sender {
+    [self selected:self.iphoneView];
+    if ([self.delegate respondsToSelector:@selector(titleCellDidSelect:)]) {
+        [self.delegate titleCellDidSelect:CZTitleCellSelectedNavTypeIphone];
+    }
+}
+
+- (IBAction)scienceInfo:(id)sender {
+    [self selected:self.scienceInfo];
+    if ([self.delegate respondsToSelector:@selector(titleCellDidSelect:)]) {
+        [self.delegate titleCellDidSelect:CZTitleCellSelectedNavTypeScience];
+    }
+}
+
+- (void)selected:(UIButton *)btn{
+    self.selectedBtn.selected = NO;
+    btn.selected = YES;
+    self.selectedBtn = btn;
+    CGRect rect = btn.frame;
+    CGFloat minX = CGRectGetMinX(rect);
+    CGFloat maxX = CGRectGetMaxX(rect);
+    CGFloat w = maxX-minX;
+    [UIView animateWithDuration:0.3f animations:^{
+        self.redLineView.frame = CGRectMake(minX, self.redLineView.frame.origin.y, w, 3);
+    }];
+}
+- (void)awakeFromNib{
+//    self.navView.backgroundColor = [UIColor colorWithPatternImage:[UIImage resizableImageNamed:@"cities_tableview_header"]];
+    NSLog(@"唤醒XIB");
+}
+-(void)dealloc{
+    NSLog(@"销毁头");
+}
+
+
+@synthesize dict = _dict;
+- (void)setDict:(NSDictionary *)dict
+{
+    _dict = dict;
+    
+    [self.icon sd_setImageWithURL:dict[ZDImgSrcKey]];
+    self.title.text = dict[ZDTitleKey];
+}
+
++ (CGFloat)rowHeight
+{
+    return 190;
+}
+
+@end

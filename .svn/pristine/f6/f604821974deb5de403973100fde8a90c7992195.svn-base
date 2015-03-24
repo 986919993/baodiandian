@@ -1,0 +1,284 @@
+//
+//  IWComposeViewController.m
+//  传智微博
+//
+//  Created by apple on 14-7-13.
+//  Copyright (c) 2014年 itcast. All rights reserved.
+//
+
+#import "IWComposeViewController.h"
+#import "IWTextView.h"
+
+#import "AFNetworking.h"
+#import "MBProgressHUD+NJ.h"
+#import "IWComposeToolbar.h"
+#import "IWComposePhotosView.h"
+
+#import <BmobSDK/Bmob.h>
+
+#import <BmobSDK/BmobObject.h>//"BmobObject.h"
+#import <BmobSDK/BmobQuery.h>//"BmobQuery.h"
+#import <BmobSDK/BmobFile.h>
+
+@interface IWComposeViewController ()<UITextViewDelegate, IWComposeToolbarDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+/**
+ *  输入框
+ */
+@property (nonatomic, weak)  IWTextView *textView;
+/**
+ *  工具条
+ */
+@property (nonatomic, weak) IWComposeToolbar *toolbar;
+/**
+ *  图片容器
+ */
+@property (nonatomic, weak) IWComposePhotosView *photosView;
+@end
+
+@implementation IWComposeViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // 1.设置导航栏属性
+    [self setupNavBar];
+    
+    // 2.添加输入框
+    [self setupInputView];
+   
+//    // 3.添加工具条
+    [self.photosView.button addTarget:self action:@selector(openPicture) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+
+// 打开相册
+- (void)openPicture
+{
+    // 1.创建相册控制器
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    // 设置数据源
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    // 设置代理, 监听用户选中的相片
+    picker.delegate = self;
+    // 2.弹出相册
+    [self presentViewController:picker animated:YES completion:nil];
+
+}
+#pragma mark - UIImagePickerControllerDelegate
+// 用户选中相片之后调用
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    // 1.关闭相册控制器
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // 2.取出用户选中的图片
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    
+    
+    [self.photosView addImage:image];
+    
+}
+/**
+ *  监听键盘的弹出
+ */
+- (void)keyboardWillShow:(NSNotification *)note
+{
+
+    // 1.获取键盘弹出的时间
+    CGFloat duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    // 2.获取键盘的高度
+    CGRect keyboardRect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = keyboardRect.size.height;
+    
+    // 3.让toolbar移动键盘的高度
+    [UIView animateWithDuration:duration animations:^{
+        self.toolbar.transform = CGAffineTransformMakeTranslation(0, -keyboardHeight);
+    }];
+    
+}
+/**
+ *  监听键盘的隐藏
+ */
+- (void)keyboardWillHide:(NSNotification *)note
+{
+//    IWLog(@"键盘的隐藏");
+    // 1.获取键盘弹出的时间
+    CGFloat duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+
+    // 3.让toolbar移动键盘的高度
+    [UIView animateWithDuration:duration animations:^{
+        self.toolbar.transform = CGAffineTransformIdentity;
+    }];
+}
+/**
+ *  添加输入框
+ */
+- (void)setupInputView
+{
+    // 1.添加可以接收输入事件的控件
+    IWTextView *textView = [[IWTextView alloc] init];
+    textView.width = self.view.width;
+    textView.height = self.view.height;
+    textView.placeholder = @"请输入要分享信息....";
+    [self.view addSubview:textView];
+    self.textView = textView;
+    // 设置输入框无论什么时候都可以滚动
+    textView.alwaysBounceVertical = YES;
+    textView.delegate = self;
+    
+    // 2.监听文本框改变
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange) name:UITextViewTextDidChangeNotification object:textView];
+    
+    
+    // 3.添加展示图片的容器
+    IWComposePhotosView *photosView = [[IWComposePhotosView alloc] init];
+    photosView.backgroundColor = [UIColor purpleColor];
+    photosView.x = 0;
+    photosView.y = 80;
+    photosView.width = self.textView.width;
+    photosView.height = self.textView.height;
+    [self.textView addSubview:photosView];
+    self.photosView = photosView;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // 3.显示键盘
+    [self.textView becomeFirstResponder];
+}
+- (void)textChange
+{
+    // 判断是否有文本,
+    if (self.textView.text.length) {
+        // 有让发送按钮可以点击
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }else
+    {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }
+}
+#pragma mark - UITextViewDelegate
+// 被拖拽的时候调用
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
+}
+
+/**
+ *  设置导航栏属性
+ */
+- (void)setupNavBar
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStyleDone target:self action:@selector(send)];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    
+    self.title = @"发微博";
+}
+
+/**
+ *  取消
+ */
+- (void)cancel
+{
+     [self.navigationController popViewControllerAnimated:YES];
+}
+
+/**
+ *  发微博
+ */
+- (void)send
+{
+//    NSBundle    *bundle = [NSBundle mainBundle];
+//    NSString *fileString = [NSString stringWithFormat:@"%@/about" ,[bundle bundlePath] ];
+//    
+////    UIImage * imageTest = [UIImage imageNamed:@"help"];
+//    BmobObject *obj = [[BmobObject alloc] initWithClassName:@"ios_statuses"];
+//    BmobFile *file1 = [[BmobFile alloc] initWithClassName:@"ios_statuses" withFilePath:fileString];
+//    [file1 saveInBackground:^(BOOL isSuccessful, NSError *error) {
+//        //如果文件保存成功，则把文件添加到filetype列
+//        if (isSuccessful) {
+//            [obj setObject:file1  forKey:@"imageName"];
+//            [obj saveInBackground];
+//            //打印file文件的url地址
+//            NSLog(@"file1 url %@",file1.url);
+//        }else{
+//            //进行处理
+//        }
+//    }];
+
+    
+}
+/**
+ *  发送有图片的微博
+ */
+- (void)sendStatusWithImage
+{
+    // 发送一个post请求
+    // 1.获取AFN的请求管理者
+    AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+    
+    // 传递请求参数/请求地址
+    NSString *url = @"https://upload.api.weibo.com/2/statuses/upload.json";
+    
+    [manger POST:url parameters:parmas constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        // 取出第一张图片
+        UIImage *image = [self.photosView.images firstObject];
+        // 将图片转换为二进制
+        NSData *data = UIImagePNGRepresentation(image);
+
+        // 上传文件
+      
+        [formData appendPartWithFileData:data name:@"pic" fileName:@"123" mimeType:@"image/png"];
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //        IWLog(@"发送成功");
+        // 1.提示用户
+        [MBProgressHUD showSuccess:@"发送成功"];
+        
+        // 2.关闭发送界面
+         [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+    }];
+}
+/**
+ *  发送没有图片的微博
+ */
+- (void)sendStatusWithoutImage
+{
+    // 发送一个post请求
+    // 1.获取AFN的请求管理者
+    AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
+    
+    NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
+
+    
+    // 3.发送请求
+    // 传递请求参数/请求地址
+    NSString *url = @"https://api.weibo.com/2/statuses/update.json";
+    [manger POST:url parameters:parmas success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        //        IWLog(@"发送成功");
+        // 1.提示用户
+        [MBProgressHUD showSuccess:@"发送成功"];
+        
+        // 2.关闭发送界面
+        [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+@end
