@@ -38,12 +38,13 @@
     self.account = account;
     if (account.nickname.length >0) {
         NSURL *url = [NSURL URLWithString:account.figureurl_qq_2];
+        __weak typeof(self) weakSelf = self;
         [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"lol"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             UIImage *userImage = [imageView image];
-            [self.userIcon setImage:userImage];
+            [weakSelf.userIcon setImage:userImage];
             
-            UIImage *oldImage =  [self.userIcon image];
+            UIImage *oldImage =  [weakSelf.userIcon image];
             
             UIGraphicsBeginImageContextWithOptions(oldImage.size, NO, 0.0);
             
@@ -51,10 +52,10 @@
             CGContextAddEllipseInRect(ctx, CGRectMake(2, 2, oldImage.size.width, oldImage.size.height));
             CGContextClip(ctx);
             [oldImage drawInRect:CGRectMake(2, 2, oldImage.size.width, oldImage.size.height)];
-            self.userIcon.image = UIGraphicsGetImageFromCurrentImageContext();
+            weakSelf.userIcon.image = UIGraphicsGetImageFromCurrentImageContext();
             
             UIGraphicsEndImageContext();
-            self.userName.text = account.nickname;
+            weakSelf.userName.text = account.nickname;
         }];
     }else{
         self.userName.text = @"点击头像登陆";

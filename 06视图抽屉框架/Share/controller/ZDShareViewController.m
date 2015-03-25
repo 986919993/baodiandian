@@ -61,6 +61,7 @@ int StatusesSkip = 0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 加载设置Nav导航条按钮
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.title = @"分享交流";
     // 加载下拉刷新&上拉刷新
     [self setupRefresh];
     self.tableView.alwaysBounceVertical = YES;

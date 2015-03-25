@@ -71,7 +71,6 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    NSLog(@"处理推送消息%@",userInfo); //  我了个擦擦   进不来这方法。。
 // userInfoquired
     [APService handleRemoteNotification:userInfo];
 }

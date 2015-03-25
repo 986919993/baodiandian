@@ -64,6 +64,7 @@ static NSString *itemID = @"itemCell";
 {
     [super viewDidLoad];
     [self setting];
+    self.title = @"搜索";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"leftmenu_geren2"] style:UIBarButtonItemStyleDone target:self action:@selector(presentLeftMenuViewController:)];
     [self.navigationItem.leftBarButtonItem setCustomView:self.homeButton];
 }
